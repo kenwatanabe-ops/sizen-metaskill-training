@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>SIZEN メタスキル研修 v4 — 心技体知</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAFAFA;
+    --bg-card: #FFFFFF;
+    --fg: #0A0A0A;
+    --fg-muted: #525252;
+    --subtle: #71717A;
+    --accent: #059669;
+    --accent-soft: #D1FAE5;
+    --border: #E4E4E7;
+    --code-bg: #F4F4F5;
+    --quote-bg: #F4F4F5;
+    --shin: #DC2626;
+    --gi: #2563EB;
+    --tai: #059669;
+    --chi: #7C3AED;
+    --sd-beige:    #C8B58E;
+    --sd-purple:   #6B46C1;
+    --sd-red:      #DC2626;
+    --sd-blue:     #2563EB;
+    --sd-orange:   #EA580C;
+    --sd-green:    #16A34A;
+    --sd-yellow:   #EAB308;
+    --sd-turquoise:#0891B2;
+  }
+  [data-theme="dark"] {
+    --bg: #0A0A0A;
+    --bg-card: #18181B;
+    --fg: #FAFAFA;
+    --fg-muted: #A1A1AA;
+    --subtle: #71717A;
+    --accent: #34D399;
+    --accent-soft: rgba(52, 211, 153, 0.12);
+    --border: #27272A;
+    --code-bg: #18181B;
+    --quote-bg: #18181B;
+    --shin: #F87171;
+    --gi: #60A5FA;
+    --tai: #34D399;
+    --chi: #A78BFA;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--fg);
+    font-family: 'Inter', 'Noto Sans JP', -apple-system, sans-serif;
+    font-size: 16px; line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    transition: background 0.3s, color 0.3s;
+  }
+  header.top {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: var(--bg); border-bottom: 1px solid var(--border);
+    z-index: 100; padding: 14px 32px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  header.top .brand { font-weight: 600; font-size: 14px; letter-spacing: 0.05em; }
+  header.top .brand span.accent { color: var(--accent); }
+  header.top .controls { display: flex; gap: 12px; align-items: center; }
+  header.top button {
+    background: transparent; border: 1px solid var(--border);
+    color: var(--fg); padding: 6px 12px; border-radius: 4px;
+    font-size: 13px; cursor: pointer; font-family: inherit;
+    transition: all 0.2s;
+  }
+  header.top button:hover { border-color: var(--accent); color: var(--accent); }
+  .layout {
+    display: grid; grid-template-columns: 260px 1fr;
+    max-width: 1280px; margin: 0 auto; padding-top: 56px;
+  }
+  aside.nav {
+    position: sticky; top: 56px; align-self: start;
+    height: calc(100vh - 56px); overflow-y: auto;
+    padding: 32px 20px; border-right: 1px solid var(--border);
+    font-size: 13px;
+  }
+  aside.nav h3 {
+    font-size: 11px; letter-spacing: 0.1em;
+    color: var(--subtle); text-transform: uppercase;
+    margin-bottom: 16px; font-weight: 500;
+  }
+  aside.nav ol { list-style: none; }
+  aside.nav li { margin-bottom: 2px; }
+  aside.nav a {
+    color: var(--fg-muted); text-decoration: none;
+    display: flex; padding: 8px 10px; border-radius: 4px;
+    transition: all 0.2s; gap: 8px;
+  }
+  aside.nav a:hover { background: var(--accent-soft); color: var(--fg); }
+  aside.nav a.active { background: var(--accent-soft); color: var(--accent); font-weight: 500; }
+  aside.nav a .num { color: var(--accent); font-weight: 600; min-width: 28px; font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+  main { padding: 64px 64px 120px; max-width: 920px; }
+  section { margin-bottom: 96px; scroll-margin-top: 80px; }
+  .part-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 8px; }
+  .part-header .num { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 14px; letter-spacing: 0.05em; font-weight: 500; }
+  .part-header .kind { color: var(--subtle); font-size: 12px; text-transform: uppercase; letter-spacing: 0.15em; }
+  section[data-color="shin"] .part-header .num { color: var(--shin); }
+  section[data-color="gi"]   .part-header .num { color: var(--gi); }
+  section[data-color="tai"]  .part-header .num { color: var(--tai); }
+  section[data-color="chi"]  .part-header .num { color: var(--chi); }
+  section[data-color="shin"] em { color: var(--shin); }
+  section[data-color="gi"]   em { color: var(--gi); }
+  section[data-color="tai"]  em { color: var(--tai); }
+  section[data-color="chi"]  em { color: var(--chi); }
+  h2.part-title { font-size: 36px; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.02em; }
+  .part-subtitle { color: var(--fg-muted); font-size: 18px; margin-bottom: 40px; line-height: 1.6; }
+  h3 { font-size: 22px; font-weight: 600; margin-top: 48px; margin-bottom: 16px; letter-spacing: -0.01em; }
+  h4 { font-size: 17px; font-weight: 600; margin-top: 28px; margin-bottom: 10px; }
+  p { margin-bottom: 16px; }
+  ul, ol { margin: 0 0 16px 24px; }
+  li { margin-bottom: 6px; }
+  strong { font-weight: 600; }
+  em { color: var(--accent); font-style: normal; font-weight: 500; }
+  code { background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: 'JetBrains Mono', monospace; font-size: 0.88em; }
+
+  .king-words {
+    border-left: 3px solid var(--accent);
+    padding: 18px 24px;
+    background: var(--accent-soft);
+    margin: 24px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 16px;
+  }
+  .king-words .label {
+    font-size: 11px; letter-spacing: 0.15em;
+    color: var(--accent); text-transform: uppercase;
+    font-weight: 600; margin-bottom: 6px; display: block;
+  }
+  .king-words p { margin-bottom: 0; font-weight: 500; }
+  blockquote {
+    background: var(--quote-bg); padding: 16px 24px;
+    border-radius: 6px; margin: 16px 0;
+    color: var(--fg-muted); font-size: 15px;
+    border: 1px solid var(--border);
+  }
+  blockquote .cite { display: block; font-size: 12px; margin-top: 8px; color: var(--subtle); }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+  th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  th { color: var(--subtle); font-weight: 500; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+  tbody tr:hover { background: var(--accent-soft); }
+  .grid { display: grid; gap: 16px; margin: 20px 0; }
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+  @media (max-width: 768px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  }
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 22px;
+  }
+  .card h4 { margin-top: 0; }
+  .card .badge {
+    display: inline-block;
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 2px 10px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  section[data-color="shin"] .card .badge { background: rgba(220,38,38,0.1); color: var(--shin); }
+  section[data-color="gi"]   .card .badge { background: rgba(37,99,235,0.1); color: var(--gi); }
+  section[data-color="tai"]  .card .badge { background: rgba(5,150,105,0.1); color: var(--tai); }
+  section[data-color="chi"]  .card .badge { background: rgba(124,58,237,0.1); color: var(--chi); }
+
+  /* スキル3層ピラミッド */
+  .skill-pyramid {
+    margin: 32px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+  .skill-pyramid .tier {
+    width: 100%;
+    padding: 24px 32px;
+    border: 1px solid var(--border);
+    text-align: center;
+    position: relative;
+    background: var(--bg-card);
+  }
+  .skill-pyramid .tier.t3 {
+    width: 40%;
+    background: rgba(124, 58, 237, 0.08);
+    border-color: var(--chi);
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+  }
+  .skill-pyramid .tier.t2 {
+    width: 65%;
+    background: rgba(37, 99, 235, 0.08);
+    border-color: var(--gi);
+    border-bottom: none;
+  }
+  .skill-pyramid .tier.t1 {
+    width: 90%;
+    background: rgba(5, 150, 105, 0.10);
+    border-color: var(--tai);
+    border-radius: 0 0 8px 8px;
+    border-width: 1px 1px 2px 1px;
+  }
+  .skill-pyramid .tier-num {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--subtle);
+    margin-bottom: 6px;
+  }
+  .skill-pyramid .tier-title { font-size: 19px; font-weight: 700; margin-bottom: 4px; }
+  .skill-pyramid .tier.t3 .tier-title { color: var(--chi); }
+  .skill-pyramid .tier.t2 .tier-title { color: var(--gi); }
+  .skill-pyramid .tier.t1 .tier-title { color: var(--tai); font-size: 22px; }
+  .skill-pyramid .tier-desc { font-size: 13px; color: var(--fg-muted); }
+
+  /* 心技体知 並列4分割 */
+  .shintaitaichi-4 {
+    margin: 32px 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  @media (max-width: 900px) {
+    .shintaitaichi-4 { grid-template-columns: repeat(2, 1fr); }
+  }
+  .stk-card {
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    padding: 24px 20px;
+    text-align: center;
+    background: var(--bg-card);
+    transition: transform 0.2s;
+  }
+  .stk-card:hover { transform: translateY(-2px); }
+  .stk-card.shin { border-color: var(--shin); background: rgba(220,38,38,0.04); }
+  .stk-card.gi   { border-color: var(--gi);   background: rgba(37,99,235,0.04); }
+  .stk-card.tai  { border-color: var(--tai);  background: rgba(5,150,105,0.04); }
+  .stk-card.chi  { border-color: var(--chi);  background: rgba(124,58,237,0.04); }
+  .stk-card .kanji {
+    font-size: 56px; font-weight: 700; line-height: 1;
+    margin-bottom: 8px; font-family: 'Noto Sans JP', serif;
+  }
+  .stk-card.shin .kanji { color: var(--shin); }
+  .stk-card.gi   .kanji { color: var(--gi); }
+  .stk-card.tai  .kanji { color: var(--tai); }
+  .stk-card.chi  .kanji { color: var(--chi); }
+  .stk-card .stk-label {
+    font-size: 11px; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--subtle);
+    margin-bottom: 10px; font-weight: 600;
+  }
+  .stk-card .stk-name { font-size: 16px; font-weight: 600; margin-bottom: 10px; }
+  .stk-card .stk-desc { font-size: 12.5px; color: var(--fg-muted); line-height: 1.55; }
+
+  /* Spiral Dynamics */
+  .spiral {
+    margin: 24px 0;
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .spiral .step {
+    display: grid;
+    grid-template-columns: 40px 100px 100px 1fr 2fr;
+    align-items: center;
+    padding: 12px 16px;
+    border-radius: 6px;
+    border-left: 6px solid;
+    border-top: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    background: var(--bg-card);
+  }
+  .spiral .step .step-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700; font-size: 16px;
+    color: var(--subtle);
+  }
+  .spiral .step .color-chip {
+    display: inline-block; width: 20px; height: 20px;
+    border-radius: 50%; margin-right: 8px; vertical-align: middle;
+  }
+  .spiral .step .color-name { font-weight: 700; }
+  .spiral .step .focus { color: var(--fg-muted); font-size: 13px; }
+  .spiral .step .meaning { color: var(--fg-muted); font-size: 13px; }
+  .spiral .step.beige     { border-left-color: var(--sd-beige); }
+  .spiral .step.purple    { border-left-color: var(--sd-purple); }
+  .spiral .step.red       { border-left-color: var(--sd-red); }
+  .spiral .step.blue      { border-left-color: var(--sd-blue); }
+  .spiral .step.orange    { border-left-color: var(--sd-orange); }
+  .spiral .step.green     { border-left-color: var(--sd-green); }
+  .spiral .step.yellow    { border-left-color: var(--sd-yellow); }
+  .spiral .step.turquoise { border-left-color: var(--sd-turquoise); }
+  .spiral .step .color-chip.beige     { background: var(--sd-beige); }
+  .spiral .step .color-chip.purple    { background: var(--sd-purple); }
+  .spiral .step .color-chip.red       { background: var(--sd-red); }
+  .spiral .step .color-chip.blue      { background: var(--sd-blue); }
+  .spiral .step .color-chip.orange    { background: var(--sd-orange); }
+  .spiral .step .color-chip.green     { background: var(--sd-green); }
+  .spiral .step .color-chip.yellow    { background: var(--sd-yellow); }
+  .spiral .step .color-chip.turquoise { background: var(--sd-turquoise); }
+  .spiral .barrier {
+    text-align: center; color: var(--subtle); font-size: 11px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 6px 0;
+    border-top: 1px dashed var(--border);
+    border-bottom: 1px dashed var(--border);
+    margin: 6px 0; font-weight: 600;
+  }
+  @media (max-width: 900px) {
+    .spiral .step { grid-template-columns: 1fr; gap: 4px; }
+  }
+
+  /* Triad */
+  .triad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0; }
+  @media (max-width: 768px) { .triad { grid-template-columns: 1fr; } }
+  .triad .lever {
+    background: var(--bg-card);
+    border: 2px solid var(--tai);
+    border-radius: 8px;
+    padding: 20px 24px;
+    text-align: center;
+  }
+  .triad .lever .lever-icon { font-size: 36px; margin-bottom: 8px; }
+  .triad .lever h4 { margin: 0 0 8px 0; color: var(--tai); }
+  .triad .lever p { margin: 0; font-size: 14px; color: var(--fg-muted); }
+
+  /* Layer stack */
+  .layer-stack {
+    margin: 24px 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .layer {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 80px 1fr 2fr;
+    align-items: center;
+    gap: 16px;
+  }
+  .layer:last-child { border-bottom: none; }
+  .layer .num { font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 13px; }
+  .layer .title { font-weight: 600; }
+  .layer .sources { color: var(--fg-muted); font-size: 13px; }
+
+  /* Highlight */
+  .highlight {
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    padding: 20px 24px;
+    border-radius: 0 6px 6px 0;
+    margin: 24px 0;
+  }
+  .highlight .title {
+    font-weight: 600; color: var(--accent);
+    margin-bottom: 8px;
+    font-size: 13px; letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  section[data-color="shin"] .highlight { background: rgba(220,38,38,0.08); border-left-color: var(--shin); }
+  section[data-color="shin"] .highlight .title { color: var(--shin); }
+  section[data-color="gi"]   .highlight { background: rgba(37,99,235,0.08); border-left-color: var(--gi); }
+  section[data-color="gi"]   .highlight .title { color: var(--gi); }
+  section[data-color="tai"]  .highlight { background: rgba(5,150,105,0.08); border-left-color: var(--tai); }
+  section[data-color="tai"]  .highlight .title { color: var(--tai); }
+  section[data-color="chi"]  .highlight { background: rgba(124,58,237,0.08); border-left-color: var(--chi); }
+  section[data-color="chi"]  .highlight .title { color: var(--chi); }
+
+  /* Big stat */
+  .big-stat { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 24px 0; }
+  @media (max-width: 768px) { .big-stat { grid-template-columns: 1fr; } }
+  .big-stat .stat {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px; text-align: center;
+  }
+  .big-stat .stat .value {
+    font-size: 36px; font-weight: 700;
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: -0.02em;
+  }
+  section[data-color="tai"] .big-stat .stat .value { color: var(--tai); }
+  section[data-color="chi"] .big-stat .stat .value { color: var(--chi); }
+  .big-stat .stat .label { font-size: 13px; color: var(--fg-muted); margin-top: 4px; }
+
+  /* Action */
+  .action {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .action:hover { border-color: var(--accent); }
+  .action input { margin-top: 4px; accent-color: var(--accent); }
+  .action .text { flex: 1; }
+  .action.done .text { text-decoration: line-through; color: var(--subtle); }
+
+  /* Work */
+  .work-block {
+    border: 2px dashed var(--accent);
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin: 32px 0;
+    background: var(--accent-soft);
+  }
+  section[data-color="shin"] .work-block { border-color: var(--shin); background: rgba(220,38,38,0.06); }
+  section[data-color="gi"]   .work-block { border-color: var(--gi);   background: rgba(37,99,235,0.06); }
+  section[data-color="tai"]  .work-block { border-color: var(--tai);  background: rgba(5,150,105,0.06); }
+  section[data-color="chi"]  .work-block { border-color: var(--chi);  background: rgba(124,58,237,0.06); }
+  .work-block .work-label {
+    display: inline-block; background: var(--accent); color: white;
+    padding: 4px 12px; border-radius: 4px;
+    font-size: 11px; letter-spacing: 0.1em;
+    text-transform: uppercase; font-weight: 600; margin-bottom: 12px;
+  }
+  section[data-color="shin"] .work-block .work-label { background: var(--shin); }
+  section[data-color="gi"]   .work-block .work-label { background: var(--gi); }
+  section[data-color="tai"]  .work-block .work-label { background: var(--tai); }
+  section[data-color="chi"]  .work-block .work-label { background: var(--chi); }
+  .work-block h4 { margin-top: 0; font-size: 18px; }
+  .work-block .work-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: var(--subtle); float: right;
+  }
+  .work-block ul, .work-block ol { margin-left: 20px; }
+  .work-block li { margin-bottom: 8px; }
+
+  /* Starting point comparison */
+  .startpoint {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 24px 0;
+  }
+  @media (max-width: 768px) { .startpoint { grid-template-columns: 1fr; } }
+  .startpoint .sp {
+    padding: 18px 22px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg-card);
+  }
+  .startpoint .sp.featured {
+    border: 2px solid var(--shin);
+    background: rgba(220,38,38,0.06);
+  }
+  .startpoint .sp .sp-label {
+    font-size: 11px; letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--subtle); font-weight: 600; margin-bottom: 6px;
+  }
+  .startpoint .sp.featured .sp-label { color: var(--shin); }
+  .startpoint .sp .sp-name { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+  .startpoint .sp.featured .sp-name { color: var(--shin); }
+  .startpoint .sp .sp-desc { font-size: 13px; color: var(--fg-muted); }
+
+  /* Cover */
+  .cover {
+    min-height: 70vh;
+    display: flex; flex-direction: column;
+    justify-content: center; padding: 40px 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 96px;
+  }
+  .cover .label {
+    font-size: 12px; letter-spacing: 0.2em;
+    color: var(--accent); text-transform: uppercase;
+    margin-bottom: 16px; font-weight: 600;
+  }
+  .cover h1 {
+    font-size: 56px; font-weight: 700;
+    line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 16px;
+  }
+  .cover .subtitle {
+    font-size: 22px; color: var(--fg-muted);
+    max-width: 720px; line-height: 1.5; margin-bottom: 40px;
+  }
+  .cover .meta { display: flex; gap: 40px; color: var(--subtle); font-size: 13px; flex-wrap: wrap; }
+  .cover .meta .item .label-small {
+    text-transform: uppercase; letter-spacing: 0.1em;
+    font-weight: 600; margin-bottom: 4px;
+  }
+  .cover .meta .item .val { color: var(--fg); font-weight: 500; }
+
+  footer {
+    padding: 40px 64px;
+    border-top: 1px solid var(--border);
+    color: var(--subtle); font-size: 13px; text-align: center;
+  }
+  @media print {
+    header.top, aside.nav, button { display: none !important; }
+    .layout { grid-template-columns: 1fr; padding-top: 0; }
+    main { padding: 20px; max-width: 100%; }
+    section { page-break-before: always; margin-bottom: 0; }
+    section:first-child { page-break-before: avoid; }
+    h2.part-title { font-size: 24px; }
+    body { font-size: 11pt; line-height: 1.5; }
+    .card, .king-words, .highlight, .work-block, .spiral .step,
+    .shintaitaichi-4, .skill-pyramid, .stk-card, .startpoint { break-inside: avoid; }
+    a { color: var(--fg); text-decoration: none; }
+  }
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    aside.nav { display: none; }
+    main { padding: 32px 24px 80px; }
+    h2.part-title { font-size: 28px; }
+    .cover h1 { font-size: 40px; }
+    .skill-pyramid .tier { width: 100% !important; border-radius: 8px !important; border: 1px solid var(--border) !important; margin-bottom: 8px; }
+  }
+  section { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+  section.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">SIZEN <span class="accent">·</span> メタスキル研修 <span style="color: var(--subtle); margin-left: 8px;">v4</span></div>
+  <div class="controls">
+    <button onclick="toggleTheme()" id="themeBtn">🌙 Dark</button>
+    <button onclick="window.print()">🖨 Print</button>
+  </div>
+</header>
+
+<div class="layout">
+
+<aside class="nav">
+  <h3>目次</h3>
+  <ol>
+    <li><a href="#cover" data-part="0"><span class="num">00</span>表紙</a></li>
+    <li><a href="#part-1" data-part="1"><span class="num">01</span>WHY なぜメタスキルか</a></li>
+    <li><a href="#part-2" data-part="2"><span class="num">02</span>WHAT 心技体知</a></li>
+    <li><a href="#part-3" data-part="3"><span class="num">03</span>心を鍛える</a></li>
+    <li><a href="#part-4" data-part="4"><span class="num">04</span>技を鍛える</a></li>
+    <li><a href="#part-5" data-part="5"><span class="num">05</span>体を鍛える ⭐</a></li>
+    <li><a href="#part-6" data-part="6"><span class="num">06</span>知を鍛える</a></li>
+    <li><a href="#part-7" data-part="7"><span class="num">07</span>1分間稽古</a></li>
+    <li><a href="#part-8" data-part="8"><span class="num">08</span>SIZEN MVV</a></li>
+    <li><a href="#part-9" data-part="9"><span class="num">09</span>講師ライブラリ</a></li>
+  </ol>
+</aside>
+
+<main>
+
+<!-- COVER -->
+<section id="cover" class="cover">
+  <div class="label">SIZEN 教育OS · v4</div>
+  <h1>メタスキル研修<br>— 心技体知 —</h1>
+  <p class="subtitle">AI時代を生き残るのは、メタスキルの高い者だけだ。<br>自由意志で生きる人を、世界に増やす。</p>
+  <div class="meta">
+    <div class="item"><div class="label-small">対象</div><div class="val">SIZENメンバー / 新メンバーオンボーディング</div></div>
+    <div class="item"><div class="label-small">所要</div><div class="val">90分 × 5回シリーズ</div></div>
+    <div class="item"><div class="label-small">作成</div><div class="val">2026-06-07 / v4</div></div>
+  </div>
+</section>
+
+<!-- PART 1 WHY -->
+<section id="part-1">
+  <div class="part-header">
+    <span class="num">PART 01</span>
+    <span class="kind">Why — なぜ今メタスキルか</span>
+  </div>
+  <h2 class="part-title">なぜ今、メタスキルが最も重要なのか</h2>
+  <p class="part-subtitle">AI時代を生き残るのは、ハードスキルでもソフトスキルでもなく、その土台となる「メタスキル」を持つ者だけだ。</p>
+
+  <h3>1-1. スキルの3層構造</h3>
+  <p>あらゆるスキルは、PCのアーキテクチャと同じく <em>3層構造</em> でできている。上層のスキルは、下層のスキルが整っていなければ機能しない。</p>
+
+  <div class="skill-pyramid">
+    <div class="tier t3">
+      <div class="tier-num">L3 (アプリ層)</div>
+      <div class="tier-title">ハードスキル</div>
+      <div class="tier-desc">プログラミング・マーケ・セールス・経理 など個別の業務スキル</div>
+    </div>
+    <div class="tier t2">
+      <div class="tier-num">L2 (ミドルウェア層)</div>
+      <div class="tier-title">ソフトスキル</div>
+      <div class="tier-desc">コミュニケーション・対話・チームワーク</div>
+    </div>
+    <div class="tier t1">
+      <div class="tier-num">L1 (OS層)</div>
+      <div class="tier-title">メタスキル ⭐</div>
+      <div class="tier-desc">これが古いと、最新アプリ (ハードスキル) は起動しない</div>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <div class="title">中心命題</div>
+    <p>OS (メタスキル) が古いままだと、どれだけハイスペックなアプリ (AIツール・専門スキル) を入れても起動しない。<br>= <strong>OSアップグレードが先。アプリは後。</strong></p>
+  </div>
+
+  <h3>1-2. メタスキルの定義</h3>
+  <blockquote>
+    メタスキル =<br>
+    ① スキルを <strong>使いこなす</strong> スキル<br>
+    ② スキルを <strong>習得する</strong> スキル<br>
+    ③ スキルを <strong>育てる</strong> スキル
+    <span class="cite">— 木内CEO / 土屋さん 研修 2026-05-15</span>
+  </blockquote>
+
+  <h3>1-3. なぜ今、特にメタスキルか</h3>
+  <div class="grid grid-2">
+    <div class="card">
+      <span class="badge">理由 01</span>
+      <h4>AIエージェント時代の到来</h4>
+      <p>AIが部下になる時代。<em>AIを使いこなす側</em> と <em>AIに使われる側</em> に分かれる。差を分けるのは <strong>「自己認知 → 自己修正 → 自己進化」</strong> ができるかどうか — つまりメタスキル。</p>
+    </div>
+    <div class="card">
+      <span class="badge">理由 02</span>
+      <h4>AIの自己進化ループとの同型性</h4>
+      <p>AIが自らAIを改良する自己ループ (ASI構造) と、人間の自己進化ループは同じ構造。メタスキルがある人だけがAIスピードに追随できる。</p>
+    </div>
+    <div class="card">
+      <span class="badge">理由 03</span>
+      <h4>情報量5年で4.4倍</h4>
+      <p>2019→2025年で情報量は4.4倍。エージェント時代の今は10〜20倍と推定。ハードスキルだけでは処理不能。</p>
+    </div>
+    <div class="card">
+      <span class="badge">理由 04</span>
+      <h4>500人中2-3%しか満たさない</h4>
+      <p>木内CEOが指導してきた500人のうち、メタスキルを満たしている人は <strong>2-3%</strong>。逆に言えば、ここを鍛えるだけで上位2-3%に入れる。</p>
+    </div>
+  </div>
+
+  <h3>1-4. グリッド (やり抜く力) の正体 = メタスキル</h3>
+  <p>ハーバード卒業生・米軍特殊部隊の成功者に共通するのが「グリッド」。<br>かつては「持って生まれた素養」とされていたが、近年の研究で <em>正体はメタスキルそのもの</em> だと明らかになった。<strong>後天的に伸ばせる。</strong></p>
+
+  <div class="king-words">
+    <span class="label">SIZEN PRINCIPLE</span>
+    <p>制御できないなら、それは奴隷と同じ。<br>意思か欲求か、自分で選べる人間が自由人だ。</p>
+  </div>
+</section>
+
+<!-- PART 2 WHAT -->
+<section id="part-2">
+  <div class="part-header">
+    <span class="num">PART 02</span>
+    <span class="kind">What — メタスキルの全体像</span>
+  </div>
+  <h2 class="part-title">メタスキルの全体像 — 心技体知</h2>
+  <p class="part-subtitle">武道千年の知恵が、AI時代の生存スキルを最も的確に表現している。4要素は相互に支え合う並列構造。</p>
+
+  <h3>2-1. 心技体知 = メタスキルの4本柱</h3>
+  <div class="shintaitaichi-4">
+    <div class="stk-card shin">
+      <div class="kanji">心</div>
+      <div class="stk-label">Mental</div>
+      <div class="stk-name">志・精神力<br>リーダーシップ</div>
+      <div class="stk-desc">世界観・100%の信念・自制心。<br>社会と他者を動かす力。</div>
+    </div>
+    <div class="stk-card gi">
+      <div class="kanji">技</div>
+      <div class="stk-label">Technique</div>
+      <div class="stk-name">地頭・IQ<br>抽象思考</div>
+      <div class="stk-desc">問いの質・キラー質問・抽象度。<br>フレームワークを使う力。</div>
+    </div>
+    <div class="stk-card tai">
+      <div class="kanji">体</div>
+      <div class="stk-label">Body</div>
+      <div class="stk-name">体力・突破力<br>フィジオロジー</div>
+      <div class="stk-desc">身体が脳を支配する。身体は嘘をつけない。<br>炎症ゼロが思考の前提。</div>
+    </div>
+    <div class="stk-card chi">
+      <div class="kanji">知</div>
+      <div class="stk-label">Knowledge</div>
+      <div class="stk-name">教養<br>世界と自分のバグを知る</div>
+      <div class="stk-desc">共同幻想・マトリックス論・<br>スパイラル・99.999%は見えていない世界を構造化。</div>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <div class="title">最重要原則</div>
+    <p><em>「健全な精神は肉体に宿る」</em><br>体に炎症があれば、技も心も機能しない。だから本研修では <strong>「体」</strong> を最重視する (Part 05)。<br>同時に、4要素は階層ではなく並列・相互依存。<strong>1本でも欠けたらメタスキルは成立しない</strong>。</p>
+  </div>
+
+  <div class="work-block">
+    <span class="work-time">10分</span>
+    <span class="work-label">Work 01</span>
+    <h4>自己診断: 心技体知バランス</h4>
+    <p style="margin-bottom: 12px;">4要素を10点満点で自己評価。最も低い要素が、今鍛えるべき領域。</p>
+    <ul>
+      <li><strong>心</strong> — 志/信念/感情コントロール: ___ / 10</li>
+      <li><strong>技</strong> — 問いの質/抽象思考/フレームワーク使用: ___ / 10</li>
+      <li><strong>体</strong> — 睡眠/食/エネルギー/フィジオロジー: ___ / 10</li>
+      <li><strong>知</strong> — 教養/自分と世界のバグへの自覚: ___ / 10</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ PART 3 心 ============ -->
+<section id="part-3" data-color="shin">
+  <div class="part-header">
+    <span class="num">PART 03</span>
+    <span class="kind">心 — Mental / Leadership</span>
+  </div>
+  <h2 class="part-title">心を鍛える</h2>
+  <p class="part-subtitle">リーダーシップとは、技術ではなく世界観。エネルギーとフォーカスをどこに向けるか — それが「心」の本質。</p>
+
+  <h3>3-1. リーダーシップとは何か (定義)</h3>
+  <blockquote>
+    リーダーシップは「技術」ではなく「世界観」である。<br>
+    リーダーが見ている方向に、チームは進んでいく。
+    <span class="cite">— Dr.遠藤先生 リーダーシップ世界観と行動の設計図</span>
+  </blockquote>
+
+  <div class="highlight">
+    <div class="title">公式</div>
+    <p style="font-size: 22px; font-weight: 600; text-align: center; margin: 12px 0;">リーダーシップ = エネルギー × フォーカス</p>
+    <p style="font-size: 14px;"><em>エネルギー</em> = ステート (心身の状態) を高く保つ力。エネルギーが高く、柔軟性のあるものが環境を支配する。<br><em>フォーカス</em> = 向かうべきゴールに意識を集中させる力。意識が向いたものが現実化する。</p>
+  </div>
+
+  <h3>3-2. 影響力 — 世界観を売る技術</h3>
+
+  <h4>世の中はすべてセールスである</h4>
+  <p>セールス・1on1・家庭の会話・部下指導 — 我々は常に何らかの「考え」や「信念」を売買している。</p>
+  <table>
+    <thead><tr><th>ネガティブな世界観 (買わない)</th><th>リーダーが売り返す世界観</th></tr></thead>
+    <tbody>
+      <tr><td>「自分はできない」「これは無理だ」</td><td>「あなたはできる」「やり方を一緒に考えよう」</td></tr>
+      <tr><td>「メンバーは仕事ができない」前提</td><td>「<em>どれくらい</em>仕事ができるか」前提</td></tr>
+    </tbody>
+  </table>
+
+  <h4>100%の信念 vs 99%の信念</h4>
+  <div class="highlight">
+    <div class="title">天と地の差</div>
+    <p>「99%できる」と「100%できる」と信じている間には、<strong>天と地ほどの差</strong>がある。人は言葉そのものより、話し手の <em>「確信度」</em> と <em>「エネルギー」</em> を感じ取る。</p>
+  </div>
+
+  <h4>事例: リコーの畠山さん</h4>
+  <table>
+    <thead><tr><th>一般的なセールス</th><th>畠山さんのセールス</th></tr></thead>
+    <tbody>
+      <tr><td>「何をお探しですか?」</td><td><strong>「どのリコーをお探しですか?」</strong></td></tr>
+    </tbody>
+  </table>
+  <p>畠山さんの世界観 — 「顧客は皆、本当はリコーが欲しくてたまらない。リコーは誰もが憧れるマドンナのような存在だ。」<br>この100%信念が成約率を別次元に押し上げる。彼の「売る」行為 = 顧客が自分には値しないと思っている <strong>背中を押してあげること</strong>。</p>
+
+  <h4>スノーボードの原理</h4>
+  <p><em>見ている方向に体は傾いていく</em>。避けたい障害物を見ていると、かえってそちらに向かう。あなたが見るべきは「障害物」ではなく、到達したい「ゴール」だけ。</p>
+
+  <h4>パターンインタラプション — 流れを書き換える技術</h4>
+  <p>相手の無意識的な行動・思考の「いつものパターン」を見抜き、それが完了する前に介入することで、新しい選択肢を生み出す技術。</p>
+  <table>
+    <thead><tr><th>Step</th><th>内容</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>パターン認識 — 相手の「いつもこうなる」を観察</td></tr>
+      <tr><td>2</td><td>領域侵入の察知 — 興味を示した「一瞬のサイン」</td></tr>
+      <tr><td>3</td><td>介入と変更 — 新しい質問・提案で流れを断ち切る</td></tr>
+    </tbody>
+  </table>
+  <blockquote>
+    顧客: 「なるほど、良さそうですね…」 (少し考え込む)<br>
+    [× 沈黙] → 「ちょっと検討させてください」 ← いつもの断りパターン<br>
+    [○ 介入] → 「ちなみに、AプランとBプラン、◯◯さんの状況だとどちらがしっくりきますか?」 ← 「買うか/買わないか」から「どちらを選ぶか」へシフト
+  </blockquote>
+
+  <h3>3-3. エネルギー — ステート3レバー</h3>
+  <p>あらゆる思考と行動の質は、3つのレバーで操作できる。エネルギーが落ちたら、どれか1つで切り替えればいい。</p>
+
+  <div class="triad">
+    <div class="lever" style="border-color: var(--shin); --tai: var(--shin);">
+      <div class="lever-icon">❓</div>
+      <h4 style="color: var(--shin);">質問</h4>
+      <p>どんな問いを立てるか。<br>「なぜ?」→「どうすれば?」</p>
+    </div>
+    <div class="lever" style="border-color: var(--shin); --tai: var(--shin);">
+      <div class="lever-icon">💬</div>
+      <h4 style="color: var(--shin);">言葉</h4>
+      <p>どんな言葉を選ぶか。<br>「難しい」→「簡単ではない」</p>
+    </div>
+    <div class="lever" style="border-color: var(--shin); --tai: var(--shin);">
+      <div class="lever-icon">🏃</div>
+      <h4 style="color: var(--shin);">身体</h4>
+      <p>どんな姿勢・動きをするか。<br>胸を張る・ガッツポーズ</p>
+    </div>
+  </div>
+  <p style="font-size: 13px; color: var(--fg-muted); margin-top: -8px;">→ 「身体」レバーの詳細は <a href="#part-5" style="color: var(--shin);">Part 05 (体)</a> でフィジオロジーとして深掘り。</p>
+
+  <h3>3-4. SIZEN マインドセット 5本柱</h3>
+  <blockquote>
+    マインドとは、ビジネス戦闘力の根底にあるもの。<br>
+    ビジョン・ミッション・戦略に応じて必要なマインドは変わるが、SIZENが大事にする5本柱はこれだ。
+  </blockquote>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <span class="badge">マインド 01</span>
+      <h4>コトに向かう</h4>
+      <p>誰がやったかではなく <strong>何をやったか</strong>。感情的にならず建設的議論。<em>箱から出て</em>相手を尊重する。指摘に対して落ち込まず、自分とアウトプットを切り分ける。上下関係ではなくフラットな関係で、役割の違いのみがある。</p>
+    </div>
+    <div class="card">
+      <span class="badge">マインド 02</span>
+      <h4>自由と責任</h4>
+      <p>働き方や仕事の進め方を自分で意思決定する機会が多い = <strong>成果を出す責任</strong> と <strong>ホウレンソウの責任</strong>。裁量権が欲しいなら、適切にホウレンソウできる前提が必要。教えてもらうのではなく <em>学びにいくスタンス</em>。</p>
+    </div>
+    <div class="card">
+      <span class="badge">マインド 03</span>
+      <h4>当事者意識・オーナーシップ</h4>
+      <blockquote style="margin: 8px 0; padding: 10px 14px; font-size: 13.5px; font-style: italic;">
+        Ask what you can do for the company,<br>not what the company can do for you.
+      </blockquote>
+      <p>One for all, all for one。会社が自分に何をしてくれるかではなく、<em>自分が会社に何ができるか</em> を問う。この思想が秩序を保ち、チームでコトに向かわせる。<br>=「<strong>自分で決める</strong>」「小さなリーダーシップを積み重ねる」。</p>
+    </div>
+    <div class="card">
+      <span class="badge">マインド 04</span>
+      <h4>プロ意識と細部へのこだわり</h4>
+      <p>相手への配慮・リスペクト・想像力。<em>細部までこだわる</em>姿勢。ミッション思考。ダサい選択をしない。<br>例: 会社の場所を綺麗に使う・冷蔵庫を補充する・席を立つときに椅子を引く。これは小さなことではなく、プロ意識そのもの。</p>
+    </div>
+    <div class="card" style="grid-column: 1 / -1;">
+      <span class="badge">マインド 05 — 統合</span>
+      <h4>ゴール起点で未来志向に挑戦する</h4>
+      <p>多くの人は「現状起点」や「理想起点」で考える。それでは現状の延長線上にしか行けない。<br><em>ゴール起点で逆算して動く</em>のが SIZEN の働き方。</p>
+      <div class="startpoint">
+        <div class="sp">
+          <div class="sp-label">Pattern 01</div>
+          <div class="sp-name">現状起点</div>
+          <div class="sp-desc">「今これしかないから」<br>= リアクティブ・縮こまり</div>
+        </div>
+        <div class="sp">
+          <div class="sp-label">Pattern 02</div>
+          <div class="sp-name">理想起点</div>
+          <div class="sp-desc">「こうあったらいいな」<br>= 願望・受動的</div>
+        </div>
+        <div class="sp featured">
+          <div class="sp-label">Pattern 03 ⭐</div>
+          <div class="sp-name">ゴール起点</div>
+          <div class="sp-desc">「ここに到達するために逆算」<br>= 能動的・スノーボード原理</div>
+        </div>
+      </div>
+      <p>ワクワクするサービスを作る・熱狂を作るためには、自分達がワクワクできていることが大事。<em>やりたいからやる</em>マインド。挑戦を楽しむ。今できないかは関係なく、未来ではできるようになっている。</p>
+    </div>
+  </div>
+
+  <div class="king-words">
+    <span class="label">最重要</span>
+    <p>これらマインドが前提にあった上で、そこからズレた時に修正する力が<br><em>自己認知能力・受け入れるキャパ・意思決定能力</em>。<br>これがメタスキル中核ループそのもの。</p>
+  </div>
+
+  <h3>3-5. コトに向かう vs ヒトに向かう (箱の理論)</h3>
+
+  <h4>コトに向かうとは?</h4>
+  <blockquote>
+    最終的に強い結束でみんなをまとめてくれるのは、コトです。<br>
+    <strong>「美しいかどうか。つくりたいものをつくれているか」</strong>というゴール。<br>
+    みんなの気持ちがコトに向かったときに、いろいろな部署を超えて、同じ夢を見られるようになる。
+    <span class="cite">— 南場智子 (DeNA)</span>
+  </blockquote>
+
+  <h4>ヒトに向かう = 「箱」に入っている状態</h4>
+  <div class="highlight">
+    <div class="title">根本原因</div>
+    <p><em>自己欺瞞</em> — 感情・思考・行動に整合性がない状態。<br>ある出来事が起きた時に、自分の気持ちに背いた行動をしてしまうこと。<br>(参考: アービンジャー研究所『自分の小さな箱から脱出する方法』)</p>
+  </div>
+
+  <h4>コトに向かう4ステップ</h4>
+  <div class="layer-stack">
+    <div class="layer"><span class="num">Step 1</span><span class="title">気づく</span><span class="sources">自分の状態に気づく (メタ認知)</span></div>
+    <div class="layer"><span class="num">Step 2</span><span class="title">受け入れる</span><span class="sources">期待値を理解する・ギャップを受け入れる・許す</span></div>
+    <div class="layer"><span class="num">Step 3</span><span class="title">選択する</span><span class="sources">心に素直に決める</span></div>
+    <div class="layer"><span class="num">Step 4</span><span class="title">行動する</span><span class="sources">決めたことを実行する</span></div>
+  </div>
+  <p>= <strong>AI時代の自己進化ループ「自己認知 → 自己修正 → 自己進化」と同型</strong>。</p>
+
+  <h4>3つの「切り分け」</h4>
+  <div class="grid grid-3">
+    <div class="card">
+      <span class="badge">切り分け 01</span>
+      <h4>コトとヒト</h4>
+      <p>アウトプットへのフィードバックを、人格批判と混同しない。<br><em>自分とアウトプットを切り分ける</em>。</p>
+    </div>
+    <div class="card">
+      <span class="badge">切り分け 02</span>
+      <h4>現状と理想</h4>
+      <p>プライドの置き場所を「現状の自分」ではなく「理想に向かう過程」に置く。</p>
+    </div>
+    <div class="card">
+      <span class="badge">切り分け 03</span>
+      <h4>事象と解釈</h4>
+      <p>感情が乱れるのは出来事ではなく <em>解釈</em>。<br>出来事 → 解釈 → 感情。<br><strong>自分の機嫌は自分で取る。</strong></p>
+    </div>
+  </div>
+
+  <div class="work-block">
+    <span class="work-time">15分</span>
+    <span class="work-label">Work 02</span>
+    <h4>「箱」自己診断</h4>
+    <p style="margin-bottom: 12px;">最近、ヒトに向かった (箱に入った) 瞬間を1つ思い出す。</p>
+    <ol>
+      <li><strong>出来事</strong> — 何が起きたか (事実のみ)</li>
+      <li><strong>感情</strong> — その時どう感じたか</li>
+      <li><strong>解釈</strong> — どう意味付けしたか</li>
+      <li><strong>行動</strong> — 結果どう動いたか</li>
+      <li><strong>切り分け</strong> — コトとヒト・現状と理想・事象と解釈、どこで混同したか</li>
+    </ol>
+  </div>
+
+  <h3>3-6. 心理的安全性 (Google 最強チーム 5条件)</h3>
+  <div class="layer-stack">
+    <div class="layer"><span class="num">⑤</span><span class="title">インパクト</span><span class="sources">仕事が社会に影響を与える</span></div>
+    <div class="layer"><span class="num">④</span><span class="title">仕事の意味</span><span class="sources">個人にとっての意義</span></div>
+    <div class="layer"><span class="num">③</span><span class="title">構造と明確さ</span><span class="sources">役割・目標・計画が明確</span></div>
+    <div class="layer"><span class="num">②</span><span class="title">信頼性</span><span class="sources">期日通りに高品質な仕事</span></div>
+    <div class="layer"><span class="num">①</span><span class="title">心理的安全性 ⭐</span><span class="sources">失敗を恐れず本音で意見できる土台</span></div>
+  </div>
+
+  <h3>3-7. セルフコンパッション</h3>
+  <p>木内研修も指摘する通り、<em>「最大の炎症源は自責と反芻」</em>。自分への厳しさは脳の炎症を直接生む。</p>
+  <blockquote>
+    親友が同じことで悩んでいたら、何と声をかける?<br>
+    — その言葉を、自分にもかけてください。
+  </blockquote>
+
+  <h3>3-8. 5段階成長モデル (自己認知のメタ視点)</h3>
+  <p>自分の現在地を正しく自覚することが、次のレベルに進む唯一の入口。「自分はLv1」と気づけることがLv2の入口。</p>
+  <div class="layer-stack">
+    <div class="layer"><span class="num">Lv5</span><span class="title">教育者レベル</span><span class="sources">なぜできるか言語化・他者に教えられる</span></div>
+    <div class="layer"><span class="num">Lv4</span><span class="title">無意識的有能</span><span class="sources">自動的に成果・複数スキルがシナジー</span></div>
+    <div class="layer"><span class="num">Lv3</span><span class="title">意識的有能</span><span class="sources">意識すれば成果・20時間で80点</span></div>
+    <div class="layer"><span class="num">Lv2</span><span class="title">意識的無能</span><span class="sources">「できない」自覚・成長の蛹期</span></div>
+    <div class="layer"><span class="num">Lv1</span><span class="title">無意識的無能</span><span class="sources">「できる」勘違い・最も危険 (ダニング・クルーガー効果)</span></div>
+  </div>
+
+  <h3>3-9. 武士道精神 = 自制心 = 真の強さ</h3>
+  <blockquote>
+    武士道の核心は「自制心 = 真の強さ」。<br>
+    貯金がなくなっても、会社がなくなっても、自制心さえあれば必ず復活できる。<br>
+    これが奪われない強さ。
+  </blockquote>
+  <p>新渡戸稲造『Bushido』が世界に伝えた日本人の道徳DNA。元寇1274年・北条時宗18歳がモンゴル14万を退けたのは、この自制心の力だった。</p>
+</section>
+
+<!-- ============ PART 4 技 ============ -->
+<section id="part-4" data-color="gi">
+  <div class="part-header">
+    <span class="num">PART 04</span>
+    <span class="kind">技 — Technique / Thinking</span>
+  </div>
+  <h2 class="part-title">技を鍛える</h2>
+  <p class="part-subtitle">問いの質・思考のフレームワーク・抽象度コントロール。地頭そのものを上げる方法論。</p>
+
+  <h3>4-1. 問いの質が人生を決める</h3>
+  <blockquote>
+    天才と凡人を分けるのは、ただ一つ — <em>「質問の質と量」</em> だけ。
+    <span class="cite">— Dr.遠藤先生 Mental OS Upgrade</span>
+  </blockquote>
+  <table>
+    <thead><tr><th>悪い質問 (思考停止へ)</th><th>良い質問 (解決策へ)</th></tr></thead>
+    <tbody>
+      <tr><td>なぜできない?</td><td>どうやったらできる?</td></tr>
+      <tr><td>誰のせいだ?</td><td>何を変えれば解決する?</td></tr>
+      <tr><td>無理だ</td><td>もし可能だとしたら、どうやる?</td></tr>
+      <tr><td>失敗した</td><td>何を学んだ?</td></tr>
+    </tbody>
+  </table>
+
+  <h3>4-2. キラー質問 (What if + How)</h3>
+  <div class="highlight">
+    <div class="title">最強の思考起動装置</div>
+    <p><em>「もし、◯◯が全て可能だとしたら、どうやってやりますか?」</em></p>
+    <p style="margin-top:12px; font-size: 14px; color: var(--fg-muted);">What if (もしも) で脳のリミッターを強制解除し、How (どうやって) でSystem 2 (論理思考) を起動する。</p>
+  </div>
+
+  <h3>4-3. 抽象度コントロール (チャンク質問法)</h3>
+  <table>
+    <thead><tr><th>技法</th><th>質問</th><th>用途</th></tr></thead>
+    <tbody>
+      <tr><td><strong>チャンクアップ ↑</strong></td><td>「目的は?」「何のために?」</td><td>議論が煮詰まった時 / 視座を上げる</td></tr>
+      <tr><td><strong>チャンクダウン ↓</strong></td><td>「具体的には?」「例えば?」</td><td>不明瞭な報告 / 行動分解</td></tr>
+      <tr><td><strong>ラテラル ↔</strong></td><td>「他にどんな選択肢が?」</td><td>ブレスト / 行き詰まり打開</td></tr>
+    </tbody>
+  </table>
+
+  <h3>4-4. 「でも」→「その上で」変換</h3>
+  <p>否定から入る思考のクセを、肯定・追加のクセに上書きする。</p>
+  <blockquote>
+    × その案ですね、<strong>でも</strong>予算が…<br>
+    ○ その案ですね、承知しました。<strong>その上で</strong>、予算の観点も加味するとどうでしょう?
+  </blockquote>
+
+  <h3>4-5. HLBLT 日次振返り</h3>
+  <div class="layer-stack">
+    <div class="layer"><span class="num">H</span><span class="title">High</span><span class="sources">今日のハイライト</span></div>
+    <div class="layer"><span class="num">L</span><span class="title">Low</span><span class="sources">今日の改善点</span></div>
+    <div class="layer"><span class="num">B</span><span class="title">Benefit</span><span class="sources">HighとLowの差分 = 価値</span></div>
+    <div class="layer"><span class="num">L</span><span class="title">Learning</span><span class="sources">この経験から得た教訓</span></div>
+    <div class="layer"><span class="num">T</span><span class="title">Thanks</span><span class="sources">誰に・何に感謝したいか</span></div>
+  </div>
+
+  <div class="work-block">
+    <span class="work-time">10分</span>
+    <span class="work-label">Work 03</span>
+    <h4>キラー質問ワーク (What if + How)</h4>
+    <ol>
+      <li>今、自分が抱えている最大の問題を1つ書く</li>
+      <li>「もし◯◯がすべて可能だとしたら、どうやってやる?」に書き直す</li>
+      <li>そのHow (具体的な3つの行動) を書き出す</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ PART 5 体 ⭐ ============ -->
+<section id="part-5" data-color="tai">
+  <div class="part-header">
+    <span class="num">PART 05</span>
+    <span class="kind">体 — Body / Physiology ⭐</span>
+  </div>
+  <h2 class="part-title">体を鍛える</h2>
+  <p class="part-subtitle">健全な精神は肉体に宿る。体に炎症があれば、技も心も機能しない。<br><em>身体は嘘をつけない。</em></p>
+
+  <h3>5-1. 身体が脳を支配する</h3>
+  <blockquote>
+    身体と脳は不可分。身体の状態が、思考の質を決定する。
+    <span class="cite">— Dr.遠藤先生 Peak State Action Guide</span>
+  </blockquote>
+  <p>多くの人は「思考 → 行動」の順序で考える。しかし科学的には逆。<em>身体 → 感情 → 思考</em> の順に影響が伝わる。だから、思考や感情を変えたいなら、まず <strong>身体</strong> を変える。</p>
+
+  <h3>5-2. 身体は嘘をつけない</h3>
+  <div class="highlight">
+    <div class="title">中心命題 (Tony Robbins / 遠藤先生)</div>
+    <p>言葉や思考はいくらでも嘘をつけるが、<em>身体は嘘をつけない</em>。<br>身体を変えれば、感情と思考は自動的に追随する。</p>
+  </div>
+
+  <div class="grid grid-3">
+    <div class="card">
+      <span class="badge">事実 01</span>
+      <h4>ジャンプしながら<br>ネガティブは不可能</h4>
+      <p>身体が「上に跳ねる」動作中、脳内のネガティブ回路は物理的に発火できない。</p>
+    </div>
+    <div class="card">
+      <span class="badge">事実 02</span>
+      <h4>笑顔のまま<br>怒れない</h4>
+      <p>口角を上げた状態を3秒キープすると、脳は「楽しい」と判定する。</p>
+    </div>
+    <div class="card">
+      <span class="badge">事実 03</span>
+      <h4>胸を張って<br>下を向けない</h4>
+      <p>胸を張った姿勢で目線を下げるのは物理的に困難。姿勢を整えると自信ホルモンが分泌される。</p>
+    </div>
+  </div>
+
+  <div class="work-block">
+    <span class="work-time">5分</span>
+    <span class="work-label">Work 04 — フィジオロジー実演</span>
+    <h4>身体は嘘をつけない・体感ワーク</h4>
+    <ol>
+      <li>今、座ったまま「俺はダメだ」と3回つぶやく → どう感じるか</li>
+      <li>立ち上がる → その場でジャンプ3回 → ガッツポーズ → 再度「俺はダメだ」と言ってみる</li>
+      <li>→ <em>同じ言葉なのに、感じ方がまるで違う</em>。これがフィジオロジー。</li>
+    </ol>
+  </div>
+
+  <h3>5-3. フィジオロジー 5秒 State Change 4技法</h3>
+  <div class="grid grid-2">
+    <div class="card">
+      <span class="badge">技法 01</span>
+      <h4>姿勢を変える</h4>
+      <ul><li>胸を張る・空を見上げる</li><li>パワーポーズ (両手を腰に)</li><li>立ち上がる</li></ul>
+    </div>
+    <div class="card">
+      <span class="badge">技法 02</span>
+      <h4>動きを変える</h4>
+      <ul><li>その場でジャンプ・スキップ</li><li>ガッツポーズ・両手を上に伸ばす</li><li>歩く・階段を一段飛ばし</li></ul>
+    </div>
+    <div class="card">
+      <span class="badge">技法 03</span>
+      <h4>呼吸を変える</h4>
+      <ul><li>「はー」と長く吐く</li><li>4-7-8 呼吸法</li><li>鼻呼吸に切り替え</li></ul>
+    </div>
+    <div class="card">
+      <span class="badge">技法 04</span>
+      <h4>表情を変える</h4>
+      <ul><li>口角を上げる (10秒キープ)</li><li>眉間のシワを伸ばす</li><li>目を見開く (集中力UP)</li></ul>
+    </div>
+  </div>
+
+  <div class="king-words">
+    <span class="label">実践原則</span>
+    <p>反芻に気づいたら、デスクから物理的に離れる。<br>「考えるな、動け」。身体が変われば、思考は自動的に変わる。</p>
+  </div>
+
+  <h3>5-4. 脳疲労の公式</h3>
+  <div class="highlight">
+    <div class="title">公式</div>
+    <p style="font-size: 22px; font-weight: 600; text-align: center; margin: 12px 0;">脳疲労 = 情報処理 + 炎症 − 回復</p>
+    <p style="font-size: 14px;">最大の炎症源は <em>「自責と反芻」</em>。木内CEO研修より。</p>
+  </div>
+
+  <h3>5-5. 衝撃の数字</h3>
+  <div class="big-stat">
+    <div class="stat"><div class="value">4.4×</div><div class="label">5年で増えた情報処理量</div></div>
+    <div class="stat"><div class="value">17h</div><div class="label">起き続けた時の判断力<br>= 飲酒運転クラス</div></div>
+    <div class="stat"><div class="value">21min</div><div class="label">1通知で集中が切れた後の<br>復帰所要時間</div></div>
+  </div>
+
+  <h3>5-6. ドーパミン依存度マップ</h3>
+  <table>
+    <thead><tr><th>刺激</th><th>ドーパミン量</th><th>分類</th></tr></thead>
+    <tbody>
+      <tr><td>通常</td><td>30-50%</td><td>ベースライン</td></tr>
+      <tr><td>食事</td><td>55%</td><td>ベースライン</td></tr>
+      <tr><td>運動・セックス</td><td>75-100%</td><td>ベースライン</td></tr>
+      <tr><td>ニコチン</td><td>150%</td><td>スパイク</td></tr>
+      <tr><td>アルコール</td><td>200%</td><td>スパイク</td></tr>
+      <tr><td>コカイン</td><td>225%</td><td>スパイク</td></tr>
+      <tr style="background: rgba(220,38,38,0.05);"><td><strong>ポルノ / スマホ</strong></td><td><strong>覚せい剤超え</strong></td><td><strong>スパイク (無限摂取可)</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h3>5-7. スパイク型 vs ベースライン型</h3>
+  <div class="grid grid-2">
+    <div class="card">
+      <span class="badge" style="background: rgba(220,38,38,0.1); color: var(--shin);">スパイク型 (悪)</span>
+      <h4>急上昇 → 急降下 → 受容体破壊</h4>
+      <ul><li>SNS / 砂糖 / コーヒー</li><li>アルコール / ジャンクフード</li><li>ポルノ / ショート動画</li></ul>
+    </div>
+    <div class="card">
+      <span class="badge">ベースライン型 (良)</span>
+      <h4>じわじわ持続 → 受容体回復</h4>
+      <ul><li>運動 / 瞑想 / 散歩</li><li>粗食 / お茶</li><li>仲間との会話 / 新しい挑戦</li><li>行水 (コールドシャワー)</li></ul>
+    </div>
+  </div>
+
+  <h3>5-8. 体の炎症源 — 4毒</h3>
+  <table>
+    <thead><tr><th>毒</th><th>影響</th></tr></thead>
+    <tbody>
+      <tr><td><strong>小麦</strong></td><td>BBB (脳血管関門) を2週間開く。サイトカイン全身炎症。腸壁穴開け。</td></tr>
+      <tr><td><strong>植物性油</strong></td><td>細胞膜が酸化油で構成され、細胞が3ヶ月炎症し続ける。</td></tr>
+      <tr><td><strong>乳製品</strong></td><td>日本人の85%が分解できない。</td></tr>
+      <tr><td><strong>砂糖</strong></td><td>血糖スパイク + ドーパミンスパイクで受容体破壊。</td></tr>
+    </tbody>
+  </table>
+
+  <h3>5-9. コーヒーの闇 / お茶への移行</h3>
+  <div class="grid grid-2">
+    <div class="card">
+      <span class="badge">歴史</span>
+      <h4>コーヒーは「奴隷化マーケ」の発明品</h4>
+      <p>産業革命期: コーヒー+砂糖で奴隷が「自ら工場に来る」設計。GHQマーケで戦後日本に「米→パン / お茶→コーヒー」食卓置換。</p>
+    </div>
+    <div class="card">
+      <span class="badge">解</span>
+      <h4>お茶 (1000年の歴史)</h4>
+      <p>テアニン+カフェインで緩やかな覚醒が長時間持続。日本人の体に1000年適合。</p>
+    </div>
+  </div>
+
+  <h3>5-10. 置換法 — 我慢は続かない</h3>
+  <div class="highlight">
+    <div class="title">原則</div>
+    <p>禁欲は脳が反発する。<em>置換だけが続く。</em></p>
+  </div>
+  <table>
+    <thead><tr><th>元の蛇口</th><th>Step 1</th><th>Step 2</th><th>Step 3</th></tr></thead>
+    <tbody>
+      <tr><td>コーヒー</td><td>デカフェ</td><td>お茶</td><td>抹茶</td></tr>
+      <tr><td>朝のスマホ</td><td>散歩しながら</td><td>散歩のみ</td><td>瞑想・行水</td></tr>
+      <tr><td>ラーメン</td><td>グルテンフリー麺</td><td>10割そば</td><td>玄米食</td></tr>
+      <tr><td>酒</td><td>週末のみ</td><td>ノンアル</td><td>炭酸水</td></tr>
+      <tr><td>スイーツ</td><td>干し芋</td><td>フルーツ</td><td>大豆・煎餅</td></tr>
+    </tbody>
+  </table>
+
+  <h3>5-11. ナイトルーティン13項目 (木内CEO実物)</h3>
+  <div class="grid grid-2">
+    <div class="card">
+      <h4>環境準備</h4>
+      <ul><li>就寝1.5h前 スマホ電源OFF</li><li>ろうそく・間接照明</li><li>寝室温度 21-23度</li><li>天然素材寝巻</li><li>寝室浄化</li></ul>
+    </div>
+    <div class="card">
+      <h4>身体準備</h4>
+      <ul><li>入浴 (ふくらはぎ水圧)</li><li>エプソムソルト</li><li>ストレッチ</li><li>瞑想 5分</li><li>頭皮マッサージ</li><li>耳栓 + アイマスク</li><li>口テープ + 鼻テープ</li><li>Oura Ring 計測</li></ul>
+    </div>
+  </div>
+
+  <h3>5-12. 環境の力 > 意志力</h3>
+  <blockquote>
+    人間の生産性は、室温21-22℃で最大化される。意志力に頼るな。環境を設計せよ。
+    <span class="cite">— Dr.遠藤先生 思考OSアップグレード</span>
+  </blockquote>
+
+  <h3>5-13. 戦略的休養</h3>
+  <div class="highlight">
+    <div class="title">原則</div>
+    <p>疲れてから休むのではなく、<em>疲れる前に休む</em>。</p>
+  </div>
+  <div class="grid grid-3">
+    <div class="card"><h4>マイクロブレイク (日次)</h4><p>5-20分 × 2-3回。散歩・呼吸・パワーナップ20分。</p></div>
+    <div class="card"><h4>中休憩 (週次)</h4><p>半日〜1日。完全に仕事から離れる。</p></div>
+    <div class="card"><h4>大休憩 (月次)</h4><p>旅行・場所を変える。デロード期。</p></div>
+  </div>
+
+  <div class="work-block">
+    <span class="work-time">15分</span>
+    <span class="work-label">Work 05</span>
+    <h4>ドーパミン蛇口分析 + 段階置換</h4>
+    <p style="margin-bottom: 12px;">全開になっている自分のドーパミン蛇口を書き出し、依存度1-10で評価。Lv5以上に段階置換案を書く。</p>
+  </div>
+</section>
+
+<!-- ============ PART 6 知 ============ -->
+<section id="part-6" data-color="chi">
+  <div class="part-header">
+    <span class="num">PART 06</span>
+    <span class="kind">知 — Knowledge / Meta-Awareness</span>
+  </div>
+  <h2 class="part-title">知を鍛える</h2>
+  <p class="part-subtitle">教養とは「自分のバグ」と「世界のバグ」を発見する力。世界の構造を理解し、自分の認知の歪みに自覚的になる。</p>
+
+  <h3>6-1. 99.999%は見えていない</h3>
+  <div class="big-stat">
+    <div class="stat"><div class="value">10G</div><div class="label">五感から入る情報 (bit/秒)</div></div>
+    <div class="stat"><div class="value">126</div><div class="label">脳が処理できる情報 (bit/秒)</div></div>
+    <div class="stat"><div class="value">99.999%</div><div class="label">無意識に「削除」される割合</div></div>
+  </div>
+
+  <h3>6-2. 認識バイアス3技術 (脳のフィルター)</h3>
+  <div class="grid grid-3">
+    <div class="card">
+      <span class="badge">フィルター 01</span>
+      <h4>消去 (Deletion)</h4>
+      <p>認知負荷軽減のため大部分を無意識に削除。</p>
+    </div>
+    <div class="card">
+      <span class="badge">フィルター 02</span>
+      <h4>歪曲 (Distortion)</h4>
+      <p>事実と解釈が乖離 → 誤解の原因。</p>
+    </div>
+    <div class="card">
+      <span class="badge">フィルター 03</span>
+      <h4>一般化 (Generalization)</h4>
+      <p>パターン抽出で効率処理 → 固定観念化。</p>
+    </div>
+  </div>
+
+  <h3>6-3. マトリックス論 (共同幻想)</h3>
+  <div class="highlight">
+    <div class="title">中心命題</div>
+    <p>ビジネスも・宗教も・SNSも・お金も・国家も — 全部 <em>共同幻想 (=みんなで信じてる物語)</em>。<br>幻想から「出る」ことはできない。できるのは <strong>「より良い幻想を選ぶ」</strong> ことだけ。</p>
+  </div>
+  <p>人類が他の動物と決定的に違うのは、目に見えない物語を信じることで <em>大規模に協力できる</em> こと (ハラリ『サピエンス全史』)。</p>
+  <table>
+    <thead><tr><th>共同幻想の例</th><th>物理実体</th></tr></thead>
+    <tbody>
+      <tr><td>お金</td><td>紙切れ / 電子データ</td></tr>
+      <tr><td>会社・肩書</td><td>登記簿の記載のみ</td></tr>
+      <tr><td>国家</td><td>地図上の線</td></tr>
+      <tr><td>健康常識・栄養学</td><td>時代と共に書き換え続けている仮説</td></tr>
+      <tr><td>ブランド・価値観</td><td>みんなが信じているから成立</td></tr>
+    </tbody>
+  </table>
+
+  <h4>2つの幻想 ─ ライト vs ダーク</h4>
+  <table>
+    <thead><tr><th>ダークな幻想 (奴隷の側)</th><th>ライトな幻想 (自由人の側)</th></tr></thead>
+    <tbody>
+      <tr><td>ドーパミン依存・反射的行動</td><td>武士道・自制心・意思駆動</td></tr>
+      <tr><td>自己否定の反芻</td><td>セルフコンパッション</td></tr>
+      <tr><td>「俺はダメだ」のラベル</td><td>「変化を起こし続けるリーダー」のラベル</td></tr>
+    </tbody>
+  </table>
+
+  <h3>6-4. 認知バイアス 2大 (自分のバグ)</h3>
+  <div class="grid grid-2">
+    <div class="card">
+      <span class="badge">バイアス 01</span>
+      <h4>確証バイアス</h4>
+      <p>自分の主張を補強する情報ばかり集め、反証を無視する傾向。「自分は100%正しい」と感じた瞬間が要注意。</p>
+    </div>
+    <div class="card">
+      <span class="badge">バイアス 02</span>
+      <h4>エコーチェンバー</h4>
+      <p>同じ意見にだけ触れ、思考が偏向。<strong>AIの活用はこの危険を加速</strong>させる。</p>
+    </div>
+  </div>
+  <div class="highlight">
+    <div class="title">AIエコーチェンバーの唯一のワクチン</div>
+    <p>常に <em>「もしかしたら自分は間違っているのではないか?」</em> という逆説を抱き続ける。プロフェッショナルの思考インストール。</p>
+  </div>
+
+  <h3>6-5. スパイラル・ダイナミクス (社会・組織の発達段階)</h3>
+  <p>クレア・グレイブス博士の組織発達論。個人も組織も <em>「価値観のOS」を約7年周期でアップデート</em> する。<strong>自分と組織と社会の現在地</strong> を知る = 世界の構造を理解する。</p>
+
+  <div class="spiral">
+    <div class="step turquoise"><span class="step-num">⑧</span><span><span class="color-chip turquoise"></span><span class="color-name">ターコイズ</span></span><span class="focus">全体性</span><span class="meaning">個人・組織・地球を一つの生命システム</span></div>
+    <div class="step yellow"><span class="step-num">⑦</span><span><span class="color-chip yellow"></span><span class="color-name">イエロー</span></span><span class="focus">統合</span><span class="meaning">システム思考・全段階を状況で使い分け</span></div>
+    <div class="barrier">飛躍の壁 (Tier 1 ↑ Tier 2)</div>
+    <div class="step green"><span class="step-num">⑥</span><span><span class="color-chip green"></span><span class="color-name">グリーン</span></span><span class="focus">「我々」共生</span><span class="meaning">ミッション・多様性尊重・心理的安全</span></div>
+    <div class="step orange"><span class="step-num">⑤</span><span><span class="color-chip orange"></span><span class="color-name">オレンジ</span></span><span class="focus">「私」達成</span><span class="meaning">成果主義・物理的成果が正義</span></div>
+    <div class="step blue"><span class="step-num">④</span><span><span class="color-chip blue"></span><span class="color-name">ブルー</span></span><span class="focus">「我々」秩序</span><span class="meaning">ルール・契約・マニュアル整備</span></div>
+    <div class="step red"><span class="step-num">③</span><span><span class="color-chip red"></span><span class="color-name">レッド</span></span><span class="focus">「私」力</span><span class="meaning">覚悟・カリスマ・力が正義</span></div>
+    <div class="step purple"><span class="step-num">②</span><span><span class="color-chip purple"></span><span class="color-name">パープル</span></span><span class="focus">「我々」部族</span><span class="meaning">リーダー絶対・儀式・依存的安心</span></div>
+    <div class="step beige"><span class="step-num">①</span><span><span class="color-chip beige"></span><span class="color-name">ベージュ</span></span><span class="focus">「私」生存</span><span class="meaning">生き延びる (食/寝/安全)</span></div>
+  </div>
+
+  <h4>2つのシステム法則</h4>
+  <div class="grid grid-2">
+    <div class="card">
+      <span class="badge">法則 01</span>
+      <h4>ストレス下の「2段階下退行」</h4>
+      <p>強いストレス下で人は無意識に <strong>2段階下</strong> の戦略をとる。例: グリーン → ブルーに退行 / オレンジ → レッドに退行 (力技で押す)</p>
+    </div>
+    <div class="card">
+      <span class="badge">法則 02</span>
+      <h4>「2段階上の壁」</h4>
+      <p>人は自分の現在地から <strong>2段階上まで</strong> しか理解できない。新ビジョンを語るときは相手の段階に合わせた言葉で。</p>
+    </div>
+  </div>
+
+  <h3>6-6. ファミコン64bit 脳の限界</h3>
+  <blockquote>
+    脳の処理性能はファミコン64bit並み。五感はデバイス (目=カメラ、耳=マイク)。<br>
+    我々が認識している「現実」とは、低解像度デバイスを通した粗いシミュレーションに過ぎない。
+    <span class="cite">— 木内CEO研修 マトリックス論</span>
+  </blockquote>
+
+  <h3>6-7. 「自分のバグ」「世界のバグ」を発見する</h3>
+  <div class="grid grid-2">
+    <div class="card">
+      <span class="badge">自分のバグ</span>
+      <h4>認知バイアス・トラウマ・思い込み</h4>
+      <p>無意識に従っている確証バイアス・エコーチェンバー・古いアイデンティティ。これを発見しないと「自分」というプログラムから抜け出せない。</p>
+    </div>
+    <div class="card">
+      <span class="badge">世界のバグ</span>
+      <h4>洗脳・歴史の歪曲・既得権益</h4>
+      <p>コーヒー奴隷化マーケ / 砂糖依存 / 栄養学の嘘 / メディアバイアス。教養とはこれらを見抜く解像度を持つこと。</p>
+    </div>
+  </div>
+
+  <h3>6-8. 知の収集と運用</h3>
+  <ul>
+    <li><strong>本</strong>: 戦前の名著・武士道・東洋哲学・神経科学</li>
+    <li><strong>師匠</strong>: 一流の人から直接学ぶ (本より講義)</li>
+    <li><strong>体験</strong>: 海外・自然・断食・コールドシャワー — 身体で得た知が最も強い</li>
+    <li><strong>蓄積</strong>: Obsidian等の第2の脳に体系化</li>
+  </ul>
+
+  <div class="work-block">
+    <span class="work-time">15分</span>
+    <span class="work-label">Work 06</span>
+    <h4>スパイラル・ダイナミクス自己診断</h4>
+    <ol>
+      <li>自分の現在地はどの段階か?</li>
+      <li>1段階上の目標は何か?</li>
+      <li>ストレス時の退行パターンは何か? (2段階下)</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ PART 7 1分間稽古 ============ -->
+<section id="part-7">
+  <div class="part-header">
+    <span class="num">PART 07</span>
+    <span class="kind">How — 明日から実装</span>
+  </div>
+  <h2 class="part-title">1分間稽古 — 明日から動かす実装</h2>
+  <p class="part-subtitle">心技体知を全部いっぺんに鍛える必要はない。1秒・1分・1回から始める。</p>
+
+  <h3>7-1. 習慣化3原則</h3>
+  <div class="grid grid-3">
+    <div class="card"><span class="badge">原則 01</span><h4>反復回数の確保</h4><p>習慣化を決めるのは「日数」ではなく「回数」。</p></div>
+    <div class="card"><span class="badge">原則 02</span><h4>場所と時間の固定</h4><p>歯磨きが続く理由 = 場所と時間が固定されているから。</p></div>
+    <div class="card"><span class="badge">原則 03</span><h4>アイデンティティの確立</h4><p>「私はこういう人間だ」が行動を決める。</p></div>
+  </div>
+
+  <h3>7-2. 1秒・1分・1回でいい</h3>
+  <blockquote>
+    日常で行う全ての行動は、自分がなりたい人間像への「1票」である。<br>
+    1秒でも、1回でも投票すれば、過去のラベルは書き換わる。
+    <span class="cite">— James Clear / Atomic Habits</span>
+  </blockquote>
+
+  <h3>7-3. 明日からのチェックリスト</h3>
+  <div class="action" onclick="this.classList.toggle('done')"><input type="checkbox"><div class="text">就寝1.5時間前にスマホ電源を落とす</div></div>
+  <div class="action" onclick="this.classList.toggle('done')"><input type="checkbox"><div class="text">スマホを寝室から物理的に遠ざける</div></div>
+  <div class="action" onclick="this.classList.toggle('done')"><input type="checkbox"><div class="text">寝る時間・起きる時間を固定する</div></div>
+  <div class="action" onclick="this.classList.toggle('done')"><input type="checkbox"><div class="text">朝の誓いの言葉を声に出す</div></div>
+  <div class="action" onclick="this.classList.toggle('done')"><input type="checkbox"><div class="text">反芻に気づいたらデスクから物理的に離れる</div></div>
+  <div class="action" onclick="this.classList.toggle('done')"><input type="checkbox"><div class="text">気分が落ちた時、立ち上がってジャンプ3回</div></div>
+  <div class="action" onclick="this.classList.toggle('done')"><input type="checkbox"><div class="text">ドーパミン蛇口Top1を1段階置換する</div></div>
+  <div class="action" onclick="this.classList.toggle('done')"><input type="checkbox"><div class="text">毎日HLBLTで1日を締める</div></div>
+</section>
+
+<!-- ============ PART 8 SIZEN MVV ============ -->
+<section id="part-8">
+  <div class="part-header">
+    <span class="num">PART 08</span>
+    <span class="kind">SIZEN — Mission</span>
+  </div>
+  <h2 class="part-title">SIZEN MVV — 自由意志で生きる人を、世界に増やす</h2>
+  <p class="part-subtitle">この研修は、SIZENメンバー1人1人が「自由意志で生きる人間」になるための実践書。</p>
+
+  <div class="king-words">
+    <span class="label">SIZEN VISION</span>
+    <p>ワクワクで世界を動かす。<br>自由意志で生きる人を、世界に増やす。</p>
+  </div>
+
+  <h3>8-1. メタスキル × 自由意志 = SIZENの人材像</h3>
+  <p>メタスキルが高い人だけが、AI時代に「使われる側」ではなく「使う側」に立てる。<br>SIZENが目指すのは、<em>「自分の脳というプログラムの奴隷ではなく、自分でマトリックスを選べる人間」</em> を社内に・顧客に・社会に増やすこと。</p>
+
+  <h3>8-2. メンバーとしてのあり方</h3>
+  <div class="grid grid-2">
+    <div class="card">
+      <span class="badge">期待する姿 01</span>
+      <h4>コトに向かう</h4>
+      <p>ヒトではなくコト。誰がやったかではなく何をやったか。箱から出て建設的に。</p>
+    </div>
+    <div class="card">
+      <span class="badge">期待する姿 02</span>
+      <h4>自由と責任を一体で持つ</h4>
+      <p>裁量権を求めるなら、ホウレンソウ責任と成果責任もセット。学びにいくスタンス。</p>
+    </div>
+    <div class="card">
+      <span class="badge">期待する姿 03</span>
+      <h4>当事者意識・オーナーシップ</h4>
+      <p>"Ask what you can do for the company, not what the company can do for you" — 自分で決める。</p>
+    </div>
+    <div class="card">
+      <span class="badge">期待する姿 04</span>
+      <h4>ゴール起点で動く</h4>
+      <p>現状起点・理想起点ではなく、ゴール起点で逆算。スノーボードの原理。</p>
+    </div>
+    <div class="card">
+      <span class="badge">期待する姿 05</span>
+      <h4>身体を整える</h4>
+      <p>反芻が始まれば動く。気分が落ちればジャンプする。<em>身体は嘘をつけない</em> を実践。</p>
+    </div>
+    <div class="card">
+      <span class="badge">期待する姿 06</span>
+      <h4>プロ意識と細部へのこだわり</h4>
+      <p>SIZENメンバー自身が自由人であることが、顧客に提供する価値の根拠。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PART 9 講師ライブラリ ============ -->
+<section id="part-9">
+  <div class="part-header">
+    <span class="num">PART 09</span>
+    <span class="kind">References</span>
+  </div>
+  <h2 class="part-title">講師ライブラリ</h2>
+  <p class="part-subtitle">本研修の知見が依拠する全ソース。</p>
+
+  <div class="grid grid-2">
+    <div class="card"><span class="badge">中核思想</span><h4>木内CEO (SHIFT AI)</h4><p>メタスキル理論 / 武士道4階層 (心技体知) / 脳疲労公式 / マトリックス論 / ファミコン64bit / ドーパミン置換 / ナイトルーティン13項目</p></div>
+    <div class="card"><span class="badge">武士道セルフコントロール</span><h4>土屋さん</h4><p>2026-05-15 SHIFT AI 第1回研修登壇 / 武士道セルフコントロール</p></div>
+    <div class="card"><span class="badge">メタスキル中核</span><h4>ドクター遠藤</h4><p>Mental OS Upgrade / Peak State / 高密度コミュニケーション / 進化の地図 (Spiral Dynamics) / Influence Architecture / リーダーシップ世界観 / 思考OSアップグレード</p></div>
+    <div class="card"><span class="badge">脳科学</span><h4>遠藤貴則</h4><p>ニューロマーケティング / 脳の意思決定機構 / 認知バイアスの神経科学</p></div>
+    <div class="card"><span class="badge">武士道</span><h4>新渡戸稲造</h4><p>『Bushido: The Soul of Japan』(1900)</p></div>
+    <div class="card"><span class="badge">身体最適化</span><h4>Bryan Johnson</h4><p>Blueprint プロトコル / Don't Die / 睡眠両方</p></div>
+    <div class="card"><span class="badge">Focus・Vision</span><h4>Dan Koe</h4><p>The Art of Focus / One-Person Business</p></div>
+    <div class="card"><span class="badge">習慣化</span><h4>James Clear</h4><p>Atomic Habits / アイデンティティへの投票</p></div>
+    <div class="card"><span class="badge">State Change</span><h4>Tony Robbins</h4><p>Triad / State Management / 「身体は嘘をつけない」</p></div>
+    <div class="card"><span class="badge">仕事術</span><h4>ダン・ケネディ</h4><p>NOBS シリーズ / 経営者の時間管理</p></div>
+    <div class="card"><span class="badge">経営PDCA</span><h4>鬼速PDCA</h4><p>KGI / KSF / KPI / KDI 4層構造</p></div>
+    <div class="card"><span class="badge">共同幻想</span><h4>ユヴァル・ノア・ハラリ</h4><p>『サピエンス全史』</p></div>
+    <div class="card"><span class="badge">スパイラル・ダイナミクス</span><h4>クレア・グレイブス</h4><p>組織発達論 / 8段階モデル</p></div>
+    <div class="card"><span class="badge">箱・自己欺瞞</span><h4>アービンジャー研究所</h4><p>『自分の小さな「箱」から脱出する方法』</p></div>
+    <div class="card"><span class="badge">コトに向かう</span><h4>南場智子 (DeNA)</h4><p>「美しいかどうか・つくりたいものをつくれているか」</p></div>
+    <div class="card"><span class="badge">オーナーシップ</span><h4>ジョン・F・ケネディ (の改変)</h4><p>"Ask what you can do for the company, not what the company can do for you"</p></div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<footer>
+  <p><strong>SIZEN メタスキル研修 v4</strong> — 心技体知 / 自由意志で生きる人を、世界に増やす</p>
+  <p style="margin-top:8px;">© 2026 SIZEN Inc. / 社内研修用資料 (v4・2026-06-07)</p>
+</footer>
+
+<script>
+  function toggleTheme() {
+    const html = document.documentElement;
+    const current = html.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    document.getElementById('themeBtn').textContent = next === 'dark' ? '☀️ Light' : '🌙 Dark';
+    try { localStorage.setItem('theme', next); } catch (e) {}
+  }
+  try {
+    const saved = localStorage.getItem('theme');
+    if (saved) {
+      document.documentElement.setAttribute('data-theme', saved);
+      document.getElementById('themeBtn').textContent = saved === 'dark' ? '☀️ Light' : '🌙 Dark';
+    }
+  } catch (e) {}
+
+  const sections = document.querySelectorAll('main section');
+  const links = document.querySelectorAll('aside.nav a');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        const id = e.target.id;
+        links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '-80px 0px -50% 0px' });
+  sections.forEach(s => obs.observe(s));
+  setTimeout(() => sections.forEach(s => s.classList.add('visible')), 50);
+
+  document.querySelectorAll('.action').forEach((a, i) => {
+    const key = 'action-v4-' + (a.closest('section')?.id || 'x') + '-' + i;
+    try {
+      if (localStorage.getItem(key) === '1') { a.classList.add('done'); a.querySelector('input').checked = true; }
+    } catch (e) {}
+    a.addEventListener('click', () => {
+      const checked = a.classList.contains('done');
+      try { localStorage.setItem(key, checked ? '1' : '0'); } catch (e) {}
+    });
+  });
+</script>
+
+</body>
+</html>
