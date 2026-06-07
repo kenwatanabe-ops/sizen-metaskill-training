@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>SIZEN メタスキル研修 v5 — 心技体知</title>
+<title>SIZEN メタスキル研修 v6 — 心技体知 + 必読書統合</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -478,12 +478,86 @@
   }
   section { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
   section.visible { opacity: 1; transform: translateY(0); }
+
+  /* Role definition card (v6) */
+  .role-def {
+    border-radius: 10px;
+    padding: 20px 26px;
+    margin: 16px 0 32px;
+    border-left: 5px solid;
+    background: var(--bg-card);
+  }
+  section[data-color="shin"] .role-def { border-left-color: var(--shin); background: rgba(220,38,38,0.04); }
+  section[data-color="gi"]   .role-def { border-left-color: var(--gi);   background: rgba(37,99,235,0.04); }
+  section[data-color="tai"]  .role-def { border-left-color: var(--tai);  background: rgba(5,150,105,0.04); }
+  section[data-color="chi"]  .role-def { border-left-color: var(--chi);  background: rgba(124,58,237,0.04); }
+  .role-def .role-tag {
+    display: inline-block;
+    font-size: 11px; letter-spacing: 0.15em;
+    text-transform: uppercase; font-weight: 700;
+    margin-bottom: 6px;
+  }
+  section[data-color="shin"] .role-def .role-tag { color: var(--shin); }
+  section[data-color="gi"]   .role-def .role-tag { color: var(--gi); }
+  section[data-color="tai"]  .role-def .role-tag { color: var(--tai); }
+  section[data-color="chi"]  .role-def .role-tag { color: var(--chi); }
+  .role-def .role-name { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+  .role-def .role-desc { font-size: 15px; color: var(--fg-muted); margin: 0; line-height: 1.6; }
+
+  /* Reading list (v6) */
+  .reading-list {
+    margin: 28px 0;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px 28px;
+    background: var(--bg-card);
+  }
+  .reading-list .rl-header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .reading-list .rl-title {
+    font-size: 18px; font-weight: 700;
+  }
+  section[data-color="shin"] .reading-list .rl-title { color: var(--shin); }
+  section[data-color="gi"]   .reading-list .rl-title { color: var(--gi); }
+  section[data-color="tai"]  .reading-list .rl-title { color: var(--tai); }
+  section[data-color="chi"]  .reading-list .rl-title { color: var(--chi); }
+  .reading-list .rl-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: var(--subtle);
+  }
+  .reading-list .book {
+    padding: 12px 0;
+    border-bottom: 1px dashed var(--border);
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 12px;
+    align-items: start;
+  }
+  .reading-list .book:last-child { border-bottom: none; }
+  .reading-list .book .b-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: var(--subtle); font-weight: 600;
+    margin-top: 2px;
+  }
+  .reading-list .book .b-title {
+    font-weight: 600; font-size: 15px; margin-bottom: 2px;
+  }
+  .reading-list .book .b-author {
+    font-size: 12px; color: var(--subtle); margin-bottom: 4px;
+  }
+  .reading-list .book .b-why {
+    font-size: 13px; color: var(--fg-muted); line-height: 1.55;
+  }
 </style>
 </head>
 <body>
 
 <header class="top">
-  <div class="brand">SIZEN <span class="accent">·</span> メタスキル研修 <span style="color: var(--subtle); margin-left: 8px;">v5 (苫米地統合)</span></div>
+  <div class="brand">SIZEN <span class="accent">·</span> メタスキル研修 <span style="color: var(--subtle); margin-left: 8px;">v6 (必読書統合)</span></div>
   <div class="controls">
     <button onclick="toggleTheme()" id="themeBtn">🌙 Dark</button>
     <button onclick="window.print()">🖨 Print</button>
@@ -512,13 +586,13 @@
 
 <!-- COVER -->
 <section id="cover" class="cover">
-  <div class="label">SIZEN 教育OS · v5</div>
+  <div class="label">SIZEN 教育OS · v6</div>
   <h1>メタスキル研修<br>— 心技体知 —</h1>
   <p class="subtitle">AI時代を生き残るのは、メタスキルの高い者だけだ。<br>自由意志で生きる人を、世界に増やす。</p>
   <div class="meta">
     <div class="item"><div class="label-small">対象</div><div class="val">SIZENメンバー / 新メンバーオンボーディング</div></div>
     <div class="item"><div class="label-small">所要</div><div class="val">90分 × 5回シリーズ</div></div>
-    <div class="item"><div class="label-small">作成</div><div class="val">2026-06-07 / v5</div></div>
+    <div class="item"><div class="label-small">作成</div><div class="val">2026-06-07 / v6</div></div>
   </div>
 </section>
 
@@ -659,6 +733,12 @@
   </div>
   <h2 class="part-title">心を鍛える</h2>
   <p class="part-subtitle">リーダーシップとは、技術ではなく世界観。エネルギーとフォーカスをどこに向けるか — それが「心」の本質。</p>
+
+  <div class="role-def">
+    <div class="role-tag">役割定義</div>
+    <div class="role-name">心 = 「在り方」のメタスキル</div>
+    <p class="role-desc">何を信じるか・どう振る舞うか・どんなリーダーであるか。<br>マインドセット・志・世界観・自制心。<strong>「自分とは何者か」</strong>を定義する層。</p>
+  </div>
 
   <h3>3-1. リーダーシップとは何か (定義)</h3>
   <blockquote>
@@ -896,21 +976,83 @@
     — その言葉を、自分にもかけてください。
   </blockquote>
 
-  <h3>3-9. 5段階成長モデル (自己認知のメタ視点)</h3>
-  <div class="layer-stack">
-    <div class="layer"><span class="num">Lv5</span><span class="title">教育者レベル</span><span class="sources">なぜできるか言語化・他者に教えられる</span></div>
-    <div class="layer"><span class="num">Lv4</span><span class="title">無意識的有能</span><span class="sources">自動的に成果・複数スキルがシナジー</span></div>
-    <div class="layer"><span class="num">Lv3</span><span class="title">意識的有能</span><span class="sources">意識すれば成果・20時間で80点</span></div>
-    <div class="layer"><span class="num">Lv2</span><span class="title">意識的無能</span><span class="sources">「できない」自覚・成長の蛹期</span></div>
-    <div class="layer"><span class="num">Lv1</span><span class="title">無意識的無能</span><span class="sources">「できる」勘違い・最も危険 (ダニング・クルーガー効果)</span></div>
-  </div>
-
-  <h3>3-10. 武士道精神 = 自制心 = 真の強さ</h3>
+  <h3>3-9. 武士道精神 = 自制心 = 真の強さ</h3>
   <blockquote>
     武士道の核心は「自制心 = 真の強さ」。<br>
     貯金がなくなっても、会社がなくなっても、自制心さえあれば必ず復活できる。<br>
     これが奪われない強さ。
   </blockquote>
+
+  <div class="reading-list">
+    <div class="rl-header">
+      <div class="rl-title">📚 心の必読書 — 在り方を磨く8選</div>
+      <div class="rl-count">8 books</div>
+    </div>
+    <div class="book">
+      <div class="b-num">01</div>
+      <div>
+        <div class="b-title">自分の小さな「箱」から脱出する方法</div>
+        <div class="b-author">アービンジャー研究所</div>
+        <div class="b-why">「ヒトに向かう」自己欺瞞の構造を解く。コトに向かうための入口書。</div>
+      </div>
+    </div>
+    <div class="book">
+      <div class="b-num">02</div>
+      <div>
+        <div class="b-title">不格好経営 — チームDeNAの挑戦</div>
+        <div class="b-author">南場智子</div>
+        <div class="b-why">「コトに向かう」「みんなが球体の表面積であれ」の原典。経営者の世界観セールス。</div>
+      </div>
+    </div>
+    <div class="book">
+      <div class="b-num">03</div>
+      <div>
+        <div class="b-title">プロフェッショナルの条件</div>
+        <div class="b-author">ピーター・F・ドラッカー</div>
+        <div class="b-why">プロ意識・成果志向・知識労働者としての在り方。経営者の基本書。</div>
+      </div>
+    </div>
+    <div class="book">
+      <div class="b-num">04</div>
+      <div>
+        <div class="b-title">ビジョナリー・カンパニー Ⅰ / Ⅱ</div>
+        <div class="b-author">ジム・コリンズ</div>
+        <div class="b-why">100年続く偉大な企業の在り方。ビジョン・基本理念・第5水準のリーダーシップ。</div>
+      </div>
+    </div>
+    <div class="book">
+      <div class="b-num">05</div>
+      <div>
+        <div class="b-title">FISH! — 鮮度100%ぴちぴちオフィスのつくり方</div>
+        <div class="b-author">スティーヴン・C・ランディン</div>
+        <div class="b-why">態度を選ぶ・遊ぶ・人を喜ばせる・注意を向ける — 心理的安全性の実装書。</div>
+      </div>
+    </div>
+    <div class="book">
+      <div class="b-num">06</div>
+      <div>
+        <div class="b-title">チーズはどこへ消えた?</div>
+        <div class="b-author">スペンサー・ジョンソン</div>
+        <div class="b-why">変化への態度。コンフォートゾーンへの執着を捨てる入口書。</div>
+      </div>
+    </div>
+    <div class="book">
+      <div class="b-num">07</div>
+      <div>
+        <div class="b-title">武士道 (Bushido: The Soul of Japan)</div>
+        <div class="b-author">新渡戸稲造</div>
+        <div class="b-why">日本人の道徳DNA。誠・名誉・恥・自制心 = 真の強さ。SIZEN哲学の根。</div>
+      </div>
+    </div>
+    <div class="book">
+      <div class="b-num">08</div>
+      <div>
+        <div class="b-title">CULTURE CODE — 最強チームをつくる方法</div>
+        <div class="b-author">ダニエル・コイル</div>
+        <div class="b-why">心理的安全性 × 弱みの共有 × 共通の目的。Google5条件の実装書。</div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ============ PART 4 技 ============ -->
@@ -920,9 +1062,140 @@
     <span class="kind">技 — Technique / Thinking</span>
   </div>
   <h2 class="part-title">技を鍛える</h2>
-  <p class="part-subtitle">問いの質・思考のフレームワーク・抽象度コントロール。地頭そのものを上げる方法論。</p>
+  <p class="part-subtitle">問いの質・思考のフレームワーク・抽象度コントロール・メタ認知。地頭そのものを上げる方法論。</p>
 
-  <h3>4-1. 問いの質が人生を決める</h3>
+  <div class="role-def">
+    <div class="role-tag">役割定義</div>
+    <div class="role-name">技 = 「やり方」のメタスキル</div>
+    <p class="role-desc">どう考えるか・どう問うか・どう構造化するか・自分の思考をどうメタ認知するか。<br>思考スキル・フレームワーク・地頭力。<strong>「自分はどう考える者か」</strong>を定義する層。</p>
+  </div>
+
+  <div class="reading-list">
+    <div class="rl-header">
+      <div class="rl-title">📚 技の必読書 — 思考の土台 7選</div>
+      <div class="rl-count">7 books</div>
+    </div>
+    <div class="book">
+      <div class="b-num">01</div>
+      <div>
+        <div class="b-title">地頭力を鍛える — 問題解決に活かす「フェルミ推定」</div>
+        <div class="b-author">細谷 功</div>
+        <div class="b-why">技の根幹3思考の原典 — 抽象化思考 / 仮説思考 / フレームワーク思考。本研修「技」の土台。</div>
+      </div>
+    </div>
+    <div class="book">
+      <div class="b-num">02</div>
+      <div>
+        <div class="b-title">考える技術・書く技術</div>
+        <div class="b-author">バーバラ・ミント</div>
+        <div class="b-why">ピラミッドストラクチャーの原典。結論→根拠→事実の構造化思考。MECE・So What?・Why So?。</div>
+      </div>
+    </div>
+    <div class="book">
+      <div class="b-num">03</div>
+      <div>
+        <div class="b-title">イシューからはじめよ</div>
+        <div class="b-author">安宅 和人</div>
+        <div class="b-why">「悩む」と「考える」は違う。バリューのある仕事 = イシュー度 × 解の質。問題の前に問いを定義する。</div>
+      </div>
+    </div>
+    <div class="book">
+      <div class="b-num">04</div>
+      <div>
+        <div class="b-title">問題解決プロフェッショナル「思考と技術」</div>
+        <div class="b-author">齋藤 嘉則</div>
+        <div class="b-why">仮説思考・フレームワーク思考の実践書。マッキンゼー出身者の問題解決メソッドの古典。</div>
+      </div>
+    </div>
+    <div class="book">
+      <div class="b-num">05</div>
+      <div>
+        <div class="b-title">ロジカル・シンキング</div>
+        <div class="b-author">照屋 華子 / 岡田 恵子</div>
+        <div class="b-why">MECEの考え方・So What?/Why So?・ピラミッド構造。論理思考の基礎教科書。</div>
+      </div>
+    </div>
+    <div class="book">
+      <div class="b-num">06</div>
+      <div>
+        <div class="b-title">1分で話せ</div>
+        <div class="b-author">伊藤 羊一</div>
+        <div class="b-why">ピラミッド構造の伝達応用。結論ファースト・「左脳が納得・右脳がワクワクする話し方」。</div>
+      </div>
+    </div>
+    <div class="book">
+      <div class="b-num">07</div>
+      <div>
+        <div class="b-title">未来に先回りする思考法</div>
+        <div class="b-author">佐藤 航陽</div>
+        <div class="b-why">本質を見抜く抽象化思考。点を結ぶ線、線を結ぶ面。未来予測のメタ思考。</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>4-1. 地頭力 = 3つの思考術 (技の根幹)</h3>
+  <p>細谷功『地頭力を鍛える』が定義する <em>3つの思考術</em> が「技」の土台。これらを意識的に使い分けるだけで思考の質が劇的に上がる。</p>
+
+  <div class="grid grid-3">
+    <div class="card">
+      <span class="badge">思考術 01</span>
+      <h4>抽象化思考</h4>
+      <p>具体的な事象を一段引き上げて、本質・パターンを抽出する力。<br>例: 「この顧客の悩み」 → 「業界共通の課題」 → 「人間の根源欲求」</p>
+      <p style="font-size: 13px; color: var(--fg-muted); margin-top: 8px;">→ 苫米地「抽象度UP = IQ UP」と同源</p>
+    </div>
+    <div class="card">
+      <span class="badge">思考術 02</span>
+      <h4>仮説思考</h4>
+      <p>情報が不完全な段階で <em>「おそらくこうだろう」</em> という仮説を立て、最短で検証する。情報を全部集めてから動くと遅い。</p>
+      <p style="font-size: 13px; color: var(--fg-muted); margin-top: 8px;">→ 鬼速PDCA・Lean Startupと同源</p>
+    </div>
+    <div class="card">
+      <span class="badge">思考術 03</span>
+      <h4>フレームワーク思考</h4>
+      <p>既存の思考型 (3C/4P/SWOT/MECE) を使って、複雑な問題を <em>抜け漏れなく整理</em> する力。フレームに当てはめると盲点が消える。</p>
+      <p style="font-size: 13px; color: var(--fg-muted); margin-top: 8px;">→ コンサルが共通言語で動ける理由</p>
+    </div>
+  </div>
+
+  <h3>4-2. ピラミッドストラクチャー (考える技術・書く技術)</h3>
+  <p>バーバラ・ミント『考える技術・書く技術』が世界中のコンサルの土台にした構造化思考。</p>
+  <div class="highlight">
+    <div class="title">構造</div>
+    <p>結論 (主張) → 根拠 (3つ前後) → 事実・データ<br>各層は <em>MECE</em> (Mutually Exclusive, Collectively Exhaustive) で並列。</p>
+  </div>
+  <div class="grid grid-2">
+    <div class="card">
+      <span class="badge">縦の関係</span>
+      <h4>So What? / Why So?</h4>
+      <p>下から上: <strong>So What?</strong> (この事実から何が言える?)<br>上から下: <strong>Why So?</strong> (なぜそう言える?根拠は?)</p>
+    </div>
+    <div class="card">
+      <span class="badge">横の関係</span>
+      <h4>MECE (重複なく漏れなく)</h4>
+      <p>同じ階層の項目は <em>互いに重複せず・全体を網羅</em> する。<br>例: 売上 = 客数 × 客単価 (MECE)</p>
+    </div>
+  </div>
+
+  <h3>4-3. イシューから始めよ — バリューのある仕事の定義</h3>
+  <blockquote>
+    バリューのある仕事 = <strong>イシュー度</strong> × <strong>解の質</strong><br>
+    <em>悩むのではなく、考える。</em>
+    <span class="cite">— 安宅和人『イシューからはじめよ』</span>
+  </blockquote>
+  <div class="grid grid-2">
+    <div class="card">
+      <span class="badge">原則 01</span>
+      <h4>解の質より、イシュー度を上げる</h4>
+      <p>正しい問いに対する60点の答え > 間違った問いへの100点の答え。<br>多くの人は <em>イシュー度の低い問題</em> に時間を溶かす。</p>
+    </div>
+    <div class="card">
+      <span class="badge">原則 02</span>
+      <h4>「悩む」と「考える」は違う</h4>
+      <p><strong>悩む</strong> = 答えが出ない前提でグルグルする<br><strong>考える</strong> = 答えを出す前提で構造化する<br>悩むな、考えろ。</p>
+    </div>
+  </div>
+
+  <h3>4-4. 問いの質が人生を決める</h3>
   <blockquote>
     天才と凡人を分けるのは、ただ一つ — <em>「質問の質と量」</em> だけ。
     <span class="cite">— Dr.遠藤先生 Mental OS Upgrade</span>
@@ -937,13 +1210,14 @@
     </tbody>
   </table>
 
-  <h3>4-2. キラー質問 (What if + How)</h3>
+  <h3>4-5. キラー質問 (What if + How)</h3>
   <div class="highlight">
     <div class="title">最強の思考起動装置</div>
     <p><em>「もし、◯◯が全て可能だとしたら、どうやってやりますか?」</em></p>
+    <p style="margin-top:12px; font-size: 14px; color: var(--fg-muted);">What if (もしも) で脳のリミッターを強制解除し、How (どうやって) でSystem 2 (論理思考) を起動する。</p>
   </div>
 
-  <h3>4-3. 抽象度コントロール (チャンク質問法)</h3>
+  <h3>4-6. 抽象度コントロール (チャンク質問法)</h3>
   <table>
     <thead><tr><th>技法</th><th>質問</th><th>用途</th></tr></thead>
     <tbody>
@@ -955,23 +1229,61 @@
 
   <div class="tomabechi-box">
     <div class="t-label">📌 苫米地理論 — 抽象度を上げる = IQを上げる</div>
-    <p style="margin: 0 0 8px 0; font-size: 14px;">苫米地式IQの定義 = <strong>抽象度を自在に上下できる能力</strong>。一般的なIQテストとは別概念。</p>
+    <p style="margin: 0 0 8px 0; font-size: 14px;">苫米地式IQの定義 = <strong>抽象度を自在に上下できる能力</strong>。</p>
     <ul style="margin: 8px 0 0 20px; font-size: 14px;">
       <li>抽象度を上げる = 多様な情報を統合して構造として捉える</li>
       <li>抽象度が高い = 「もっと大きな問い」を立てられる</li>
       <li>同じ事象を別の抽象度で見ると新しい解釈が生まれる</li>
-      <li>リーダー・経営者は <em>より高い抽象度</em> で意思決定する</li>
     </ul>
-    <p style="margin: 8px 0 0 0; font-size: 14px;">→ チャンクアップ訓練 = IQ向上訓練。<strong>「目の前の問題」を1段上げると「業界の問題」、もう1段で「社会の問題」、もう1段で「人類の問題」。</strong></p>
+    <p style="margin: 8px 0 0 0; font-size: 14px;">→ チャンクアップ訓練 = IQ向上訓練。「目の前の問題」を1段上げると「業界の問題」、もう1段で「社会の問題」。</p>
   </div>
 
-  <h3>4-4. 「でも」→「その上で」変換</h3>
+  <h3>4-7. メタ認知 — 自己の思考を観察するスキル</h3>
+  <p>メタ認知 = <em>「自分が今、何を考えているかを、もう一段上から観察する力」</em>。技 (思考) のメタスキルそのもの。地頭力・問いの質・抽象度操作のすべてを支える基盤。</p>
+
+  <div class="highlight">
+    <div class="title">メタ認知の3層</div>
+    <p><strong>レベル1</strong>: 考える (思考そのもの)<br>
+    <strong>レベル2</strong>: 自分の思考を観察する (メタ認知)<br>
+    <strong>レベル3</strong>: メタ認知を改善する (メタメタ認知)</p>
+  </div>
+
+  <h4>5段階成長モデル (自己の現在地を知る)</h4>
+  <p>メタ認知の実践入口 = 自分のスキルレベルを正しく自覚すること。「自分はLv1」と気づけるのがLv2の入口。</p>
+  <div class="layer-stack">
+    <div class="layer"><span class="num">Lv5</span><span class="title">教育者レベル</span><span class="sources">なぜできるか言語化・他者に教えられる</span></div>
+    <div class="layer"><span class="num">Lv4</span><span class="title">無意識的有能</span><span class="sources">自動的に成果・複数スキルがシナジー</span></div>
+    <div class="layer"><span class="num">Lv3</span><span class="title">意識的有能</span><span class="sources">意識すれば成果・20時間で80点</span></div>
+    <div class="layer"><span class="num">Lv2</span><span class="title">意識的無能</span><span class="sources">「できない」自覚・成長の蛹期</span></div>
+    <div class="layer"><span class="num">Lv1</span><span class="title">無意識的無能</span><span class="sources">「できる」勘違い・最も危険 (ダニング・クルーガー効果)</span></div>
+  </div>
+
+  <h4>メタ認知の実践技法</h4>
+  <div class="grid grid-3">
+    <div class="card">
+      <span class="badge">技法 01</span>
+      <h4>名前を付ける</h4>
+      <p>「あ、また反芻くんが出てきた」「これは確証バイアスだ」と名前を付けると、扱える対象になる。</p>
+    </div>
+    <div class="card">
+      <span class="badge">技法 02</span>
+      <h4>書き出す (Externalization)</h4>
+      <p>頭の中で考えるのをやめ、紙やObsidianに <em>外在化</em> する。書いた瞬間に客観視できる。</p>
+    </div>
+    <div class="card">
+      <span class="badge">技法 03</span>
+      <h4>第三者視点</h4>
+      <p>「もし他人がこれを見たら何と言うか?」「自分が上司だったら何とアドバイスするか?」</p>
+    </div>
+  </div>
+
+  <h3>4-8. 「でも」→「その上で」変換</h3>
   <blockquote>
     × その案ですね、<strong>でも</strong>予算が…<br>
     ○ その案ですね、承知しました。<strong>その上で</strong>、予算の観点も加味するとどうでしょう?
   </blockquote>
 
-  <h3>4-5. HLBLT 日次振返り</h3>
+  <h3>4-9. HLBLT 日次振返り</h3>
   <div class="layer-stack">
     <div class="layer"><span class="num">H</span><span class="title">High</span><span class="sources">今日のハイライト</span></div>
     <div class="layer"><span class="num">L</span><span class="title">Low</span><span class="sources">今日の改善点</span></div>
@@ -1000,6 +1312,12 @@
   </div>
   <h2 class="part-title">体を鍛える</h2>
   <p class="part-subtitle">健全な精神は肉体に宿る。<em>身体は嘘をつけない。</em></p>
+
+  <div class="role-def">
+    <div class="role-tag">役割定義</div>
+    <div class="role-name">体 = 「整え方」のメタスキル</div>
+    <p class="role-desc">どう身体を保つか・どう脳疲労を回復するか・どう炎症を下げるか。<br>フィジオロジー・睡眠・食事・運動・休養。<strong>「自分の身体エンジンをどう運用するか」</strong>を定義する層。</p>
+  </div>
 
   <h3>5-1. 身体が脳を支配する</h3>
   <blockquote>
@@ -1172,6 +1490,53 @@
     <h4>ドーパミン蛇口分析 + 段階置換</h4>
     <p>全開になっている自分のドーパミン蛇口を書き出し、依存度1-10で評価。Lv5以上に段階置換案を書く。</p>
   </div>
+
+  <div class="reading-list">
+    <div class="rl-header">
+      <div class="rl-title">📚 体の必読書 — 身体最適化 5選</div>
+      <div class="rl-count">5 books</div>
+    </div>
+    <div class="book">
+      <div class="b-num">01</div>
+      <div>
+        <div class="b-title">Don't Die — The Man Who Wants to Live Forever</div>
+        <div class="b-author">Bryan Johnson (Blueprint プロトコル)</div>
+        <div class="b-why">年$200万投資の身体最適化メソッド。ナイトルーティン・食事・睡眠・運動の世界基準。Netflix「Don't Die」も併読推奨。</div>
+      </div>
+    </div>
+    <div class="book">
+      <div class="b-num">02</div>
+      <div>
+        <div class="b-title">スタンフォード式 最高の睡眠</div>
+        <div class="b-author">西野 精治</div>
+        <div class="b-why">睡眠の質を決める黄金の90分・体温調整・覚醒戦略。睡眠ガチ勢の入門書。</div>
+      </div>
+    </div>
+    <div class="book">
+      <div class="b-num">03</div>
+      <div>
+        <div class="b-title">食事のせいで、死なないために</div>
+        <div class="b-author">マイケル・グレガー</div>
+        <div class="b-why">死因トップ15を食事で予防する科学的根拠。4毒回避の理論的バックアップ。</div>
+      </div>
+    </div>
+    <div class="book">
+      <div class="b-num">04</div>
+      <div>
+        <div class="b-title">小麦は食べるな!</div>
+        <div class="b-author">ウィリアム・デイビス</div>
+        <div class="b-why">小麦が BBB を開くメカニズム・脳と腸の炎症連鎖。木内研修「4毒」の医学的解説。</div>
+      </div>
+    </div>
+    <div class="book">
+      <div class="b-num">05</div>
+      <div>
+        <div class="b-title">運動脳</div>
+        <div class="b-author">アンデシュ・ハンセン</div>
+        <div class="b-why">運動が脳に与える効果の最新エビデンス。フィジオロジー・ベースライン型ドーパミンの裏付け。</div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ============ PART 6 知 ============ -->
@@ -1182,6 +1547,12 @@
   </div>
   <h2 class="part-title">知を鍛える</h2>
   <p class="part-subtitle">教養とは「自分のバグ」と「世界のバグ」を発見する力。世界の構造を理解し、自分の認知の歪みに自覚的になる。</p>
+
+  <div class="role-def">
+    <div class="role-tag">役割定義</div>
+    <div class="role-name">知 = 「知り方」のメタスキル</div>
+    <p class="role-desc">世界をどう理解するか・自分の認知バグをどう発見するか・教養をどう体系化するか。<br>共同幻想・コンフォートゾーン・スコトーマ・組織発達論。<strong>「自分は世界をどう見る者か」</strong>を定義する層。</p>
+  </div>
 
   <h3>6-1. 99.999%は見えていない</h3>
   <div class="big-stat">
@@ -1345,6 +1716,69 @@
       <li>ゴール設定でCZをどこに移動したいか?</li>
     </ol>
   </div>
+
+  <div class="reading-list">
+    <div class="rl-header">
+      <div class="rl-title">📚 知の必読書 — 世界の構造と自分のバグを知る 7選</div>
+      <div class="rl-count">7 books</div>
+    </div>
+    <div class="book">
+      <div class="b-num">01</div>
+      <div>
+        <div class="b-title">サピエンス全史 / ホモ・デウス</div>
+        <div class="b-author">ユヴァル・ノア・ハラリ</div>
+        <div class="b-why">人類が <em>共同幻想</em> で大規模協力できるようになった歴史。お金・国家・会社=全て幻想。マトリックス論の原典。</div>
+      </div>
+    </div>
+    <div class="book">
+      <div class="b-num">02</div>
+      <div>
+        <div class="b-title">コンフォートゾーンの作り方 / アファメーション / 「言葉」があなたの人生を決める</div>
+        <div class="b-author">苫米地 英人</div>
+        <div class="b-why">ゴール (現状の外) / エフィカシー / コンフォートゾーン / スコトーマ / RAS / 抽象度 / R=V の認知科学コーチング理論。</div>
+      </div>
+    </div>
+    <div class="book">
+      <div class="b-num">03</div>
+      <div>
+        <div class="b-title">FACTFULNESS — 10の思い込みを乗り越え、データを基に世界を正しく見る</div>
+        <div class="b-author">ハンス・ロスリング</div>
+        <div class="b-why">世界を歪めて見る10の本能 (分断・ネガティブ・直線・恐怖等)。自分のバグを発見する教科書。</div>
+      </div>
+    </div>
+    <div class="book">
+      <div class="b-num">04</div>
+      <div>
+        <div class="b-title">The Art of Focus — Find Meaning, Reinvent Yourself...</div>
+        <div class="b-author">Dan Koe</div>
+        <div class="b-why">エントロピー原則 / Mental Energy / Vision-Focused Life。1人で$6.9M売上の現代起業家マニフェスト。</div>
+      </div>
+    </div>
+    <div class="book">
+      <div class="b-num">05</div>
+      <div>
+        <div class="b-title">ファスト&スロー</div>
+        <div class="b-author">ダニエル・カーネマン</div>
+        <div class="b-why">システム1 (速い思考・直感) vs システム2 (遅い思考・熟慮)。認知バイアスの認知科学原典。</div>
+      </div>
+    </div>
+    <div class="book">
+      <div class="b-num">06</div>
+      <div>
+        <div class="b-title">影響力の武器</div>
+        <div class="b-author">ロバート・チャルディーニ</div>
+        <div class="b-why">人が動かされる6原理 (返報性・コミットメント・社会的証明・好意・権威・希少性)。世界の見え方の操作機構。</div>
+      </div>
+    </div>
+    <div class="book">
+      <div class="b-num">07</div>
+      <div>
+        <div class="b-title">7つの習慣</div>
+        <div class="b-author">スティーブン・コヴィー</div>
+        <div class="b-why">「主体性」「終わりを思い描くことから始める」「最重要事項を優先する」。心・技・知を横断する古典中の古典。</div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ============ PART 7 1分間稽古 ============ -->
@@ -1468,8 +1902,8 @@
 </div>
 
 <footer>
-  <p><strong>SIZEN メタスキル研修 v5</strong> — 心技体知 + 苫米地理論統合 / 自由意志で生きる人を、世界に増やす</p>
-  <p style="margin-top:8px;">© 2026 SIZEN Inc. / 社内研修用資料 (v5・2026-06-07)</p>
+  <p><strong>SIZEN メタスキル研修 v6</strong> — 心技体知 + 苫米地理論 + 必読書統合 / 自由意志で生きる人を、世界に増やす</p>
+  <p style="margin-top:8px;">© 2026 SIZEN Inc. / 社内研修用資料 (v6・2026-06-07)</p>
 </footer>
 
 <script>
